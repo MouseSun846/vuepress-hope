@@ -60,7 +60,6 @@ export const getResults = (
   });
 
   results.forEach((result) => {
-    console.log("result:", result);
     const { id, terms, score } = result;
     const isCustomField = id.includes("@");
     const isSection = id.includes("#");

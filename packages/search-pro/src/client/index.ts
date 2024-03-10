@@ -2,5 +2,5 @@ export * from "./helpers/index.js";
 export {
   type SearchWorker,
   createSearchWorker,
-  setUserToken,
+  setCourseInfo,
 } from "./utils/index.js";

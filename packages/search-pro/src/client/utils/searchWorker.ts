@@ -1,5 +1,7 @@
 import { ref } from "vue";
 
+import { store } from "@temp/search-pro/store.js";
+
 import { clientWorker, searchProOptions } from "../define.js";
 import type {
   MessageData,
@@ -23,9 +25,10 @@ export interface SearchWorker {
   terminate: () => void;
 }
 
-const userToken = ref<string>("");
+const courseInfoList = ref<Array<string>>([]);
 
-export const setUserToken = (token: string) => (userToken.value = token);
+export const setCourseInfo = (courseInfo: Array<string>) =>
+  (courseInfoList.value = courseInfo);
 
 export const createSearchWorker = (): SearchWorker => {
   // Service worker with module only works on webkit browsers now, so we only used it in dev
@@ -45,9 +48,35 @@ export const createSearchWorker = (): SearchWorker => {
     "message",
     ({ data }: MessageEvent<SearchResult[]>) => {
       const { resolve } = queue.shift()!;
+      let dataLen = data.length;
 
-      console.log("userToken: ", userToken.value);
-      console.log("search result: ", data);
+      for (let i = 0; i < dataLen; i) {
+        let contentLen = data[i].contents.length;
+
+        for (let j = 0; j < contentLen; j) {
+          // 判断当前课程是否存在
+          let isExisted = false;
+
+          for (let k = 0; k < courseInfoList.value.length; k++)
+            if (
+              store[data[i].contents[j].id].indexOf(courseInfoList.value[k]) !==
+              -1
+            ) {
+              isExisted = true;
+              break;
+            }
+
+          // 不存在则删除data[i][j]
+          if (!isExisted) data[i].contents.splice(j, 1);
+          else j++;
+
+          contentLen = data[i].contents.length;
+        }
+        if (contentLen === 0) data.splice(i, 1);
+        else i++;
+
+        dataLen = data.length;
+      }
       resolve(data);
     },
   );
