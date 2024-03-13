@@ -112,10 +112,21 @@ export const createSearchWorker = (): SearchWorker => {
         });
         queues[type] = queue.slice(index + 1);
 
-        let dataLen = result.length;
+        let dataLen = 0;
+        let res: any = null;
+
+        if (type == "search") {
+          dataLen = result.length;
+          res = result;
+        } else if (type == "all") {
+          dataLen = result.results.length;
+          res = result.results;
+        } else {
+          result.slice(0, result.length);
+        }
 
         for (let i = 0; i < dataLen; i) {
-          let contentLen = result[i].contents.length;
+          let contentLen = res[i].contents.length;
 
           for (let j = 0; j < contentLen; j) {
             // 判断当前课程是否存在
@@ -123,7 +134,7 @@ export const createSearchWorker = (): SearchWorker => {
 
             for (let k = 0; k < courseInfoList.value.length; k++)
               if (
-                store[result[i].contents[j].id].indexOf(
+                store[res[i].contents[j].id].indexOf(
                   courseInfoList.value[k],
                 ) !== -1
               ) {
@@ -132,15 +143,15 @@ export const createSearchWorker = (): SearchWorker => {
               }
 
             // 不存在则删除data[i][j]
-            if (!isExisted) result[i].contents.splice(j, 1);
+            if (!isExisted) res[i].contents.splice(j, 1);
             else j++;
 
-            contentLen = result[i].contents.length;
+            contentLen = res[i].contents.length;
           }
-          if (contentLen === 0) result.splice(i, 1);
+          if (contentLen === 0) res.splice(i, 1);
           else i++;
 
-          dataLen = result.length;
+          dataLen = res.length;
         }
 
         resolve(result);

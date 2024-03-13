@@ -17,7 +17,7 @@ export const zhLocale: ThemeLocaleData = {
     tag: "标签",
     readingTime: "阅读时间",
     words: "字数",
-    toc: "此页内容",
+    toc: "目录",
     prev: "上一页",
     next: "下一页",
     lastUpdated: "上次编辑于",
