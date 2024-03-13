@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-md-enhance",
-  "version": "2.0.0-rc.27",
+  "version": "2.0.0-rc.31",
   "description": "Markdown enhancement plugin for vuepress",
   "keywords": [
     "vuepress",
@@ -94,7 +94,7 @@
     "@mdit/plugin-tex": "^0.8.0",
     "@mdit/plugin-uml": "^0.8.0",
     "@types/markdown-it": "^13.0.7",
-    "@vuepress/helper": "2.0.0-rc.18",
+    "@vuepress/helper": "2.0.0-rc.19",
     "@vueuse/core": "^10.9.0",
     "balloon-css": "^1.2.0",
     "js-yaml": "^4.1.0",
@@ -107,7 +107,7 @@
     "@types/js-yaml": "4.0.9",
     "@vuepress/bundler-vite": "2.0.0-rc.8",
     "markdown-it": "14.0.0",
-    "typescript": "5.3.3"
+    "typescript": "5.4.2"
   },
   "peerDependencies": {
     "@types/reveal.js": "^5.0.0",

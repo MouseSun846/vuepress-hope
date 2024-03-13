@@ -4,6 +4,49 @@ All notable changes to this project will be documented in this file. See [Conven
 
 <!-- #region recent-change -->
 
+## [2.0.0-rc.31](https://github.com/vuepress-theme-hope/vuepress-theme-hope/compare/v2.0.0-rc.30...v2.0.0-rc.31) (2024-03-11)
+
+### Features
+
+- **comment2:** update Giscus lang ([0328d85](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/0328d85fab62f18440cc4ef0d86ae00c3bb0d785))
+- **md-enhance:** update ts playground config ([85f3166](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/85f31669d3aaeb19f882f3b14f6a4df6c8aa5ec2))
+- remove append-date and comment plugin ([c0af3e5](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/c0af3e57113039b666ab47c41dd988c89b7a4a37))
+
+### Bug Fixes
+
+- **comment2:** fix waline variable ([a7aa9be](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/a7aa9be63ad964691edaa10b6e2b50be5e44db8d))
+
+## [2.0.0-rc.30](https://github.com/vuepress-theme-hope/vuepress-theme-hope/compare/v2.0.0-rc.29...v2.0.0-rc.30) (2024-03-10)
+
+### Bug Fixes
+
+- **create:** fix en blog template ([ed15833](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/ed158334cc6ef488bd5bc88e9dee1ce7fec236e6))
+- **search-pro:** fix search-pro production worker ([69d2e37](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/69d2e370e95649b575786843228e4a7e71ea2e63))
+- **theme:** fix toc active issue ([24aceb8](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/24aceb8e5c0b7ece4cb97ab450790121f332efe4))
+
+## [2.0.0-rc.29](https://github.com/vuepress-theme-hope/vuepress-theme-hope/compare/v2.0.0-rc.28...v2.0.0-rc.29) (2024-03-07)
+
+### Features
+
+- **search-pro:** add suggestionsFilter and resultsFilter ([bbcff53](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/bbcff53be0359155d097519bd8b4a43090e27398))
+- **search-pro:** improve createWorker api ([7789c89](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/7789c8956862893beac53e1df028260cda434e82))
+- **theme:** collapse toc while clicking ([a5d3649](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/a5d364986d34dc5452e9e4d7a7523f576ca8d71e))
+
+### Bug Fixes
+
+- **theme:** fix issues on navbar ([70553a0](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/70553a07be8ca699a978010d6acd477115ccd77e))
+
+## [2.0.0-rc.28](https://github.com/vuepress-theme-hope/vuepress-theme-hope/compare/v2.0.0-rc.27...v2.0.0-rc.28) (2024-03-07)
+
+### Features
+
+- **theme:** make label up, close [#3956](https://github.com/vuepress-theme-hope/vuepress-theme-hope/issues/3956) ([0868f2f](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/0868f2ff63c510651d656410bd07024b460644c7))
+
+### Bug Fixes
+
+- **deps:** update dependency @types/three to v0.162.0 ([#3958](https://github.com/vuepress-theme-hope/vuepress-theme-hope/issues/3958)) ([254e621](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/254e62116aa464f22771f15e83e07d9000ce31aa))
+- **theme:** fix link detect, close [#3961](https://github.com/vuepress-theme-hope/vuepress-theme-hope/issues/3961) ([29394b6](https://github.com/vuepress-theme-hope/vuepress-theme-hope/commit/29394b696c155e0982afde0d5f4cf9b9c8e3f5a4))
+
 ## [2.0.0-rc.27](https://github.com/vuepress-theme-hope/vuepress-theme-hope/compare/v2.0.0-rc.26...v2.0.0-rc.27) (2024-02-29)
 
 ### ⚠ BREAKING CHANGES

@@ -95,6 +95,7 @@ export default defineComponent({
       h(
         "header",
         {
+          key: "navbar",
           id: "navbar",
           class: [
             "vp-navbar",

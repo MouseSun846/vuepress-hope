@@ -17,6 +17,8 @@ If you want only some of the pages to be indexed, set `filter` options in plugin
 
 When indexing languages that is not word based, like Chinese, Japanese or Korean, you should set `indexOptions` and `indexLocaleOptions` to perform correct word-splitting, see [Customize Index Generation](#customize-index-generation).
 
+Meanwhile, for better client search experience, you should customize the `splitWord` option to split the input query through `defineSearchConfig`.
+
 :::
 
 ### Ultra Fast
@@ -275,7 +277,9 @@ export default defineClientConfig({
 
 ::: note
 
-Since searching is done in a Web Worker, setting options to function-typed value is not supported.
+Since searching is done in a Web Worker, setting function-typed options for `slimsearch` is not supported.
+
+For filtering suggestions and search results, we provide `suggestFilter` and `searchFilter` for you.
 
 :::
 
@@ -287,11 +291,21 @@ If you want to use the search API, you need to import the `createSearchWorker` f
 import { defineClientConfig } from "vuepress/client";
 import { createSearchWorker } from "vuepress-plugin-search-pro/client";
 
-const { search, terminate } = createSearchWorker();
+const { all, suggest, search, terminate } = createSearchWorker();
 
-// use search API
+// suggest something
+suggest("key").then((suggestions) => {
+  // display search suggestions
+});
+
+// search something
 search("keyword").then((results) => {
-  // use search results
+  // display search results
+});
+
+// return both suggestions and results
+all("key").then(({ suggestions, results }) => {
+  // display search suggestions and results
 });
 
 // terminate the worker when you don't need it

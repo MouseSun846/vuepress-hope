@@ -1,7 +1,7 @@
 import { useDebounceFn } from "@vueuse/core";
 import type { Ref } from "vue";
 import { onMounted, onUnmounted, ref, shallowRef, watch } from "vue";
-import { useRouteLocale } from "vuepress/client";
+import { usePageData, useRouteLocale } from "vuepress/client";
 
 import { searchProOptions } from "../define.js";
 import { useSearchOptions } from "../helpers/index.js";
@@ -13,32 +13,42 @@ export interface SearchRef {
   results: Ref<SearchResult[]>;
 }
 
-export const useSearchResult = (query: Ref<string>): SearchRef => {
+export const useSearchResult = (queries: Ref<string[]>): SearchRef => {
   const searchOptions = useSearchOptions();
   const routeLocale = useRouteLocale();
-  const { search, terminate } = createSearchWorker();
+  const pageData = usePageData();
 
   const searching = ref(false);
   const results = shallowRef<SearchResult[]>([]);
 
   onMounted(() => {
+    const { search, terminate } = createSearchWorker();
+
     const endSearch = (): void => {
       results.value = [];
       searching.value = false;
     };
 
-    const performSearch = useDebounceFn((queryString: string): void => {
+    const performSearch = useDebounceFn((queries: string[]): void => {
+      const query = queries.join(" ");
+      const {
+        searchFilter = (results): SearchResult[] => results,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        splitWord,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        suggestionsFilter,
+        ...options
+      } = searchOptions.value;
+
       searching.value = true;
 
-      if (queryString)
-        void search({
-          type: "search",
-          query: queryString,
-          locale: routeLocale.value,
-          options: searchOptions.value,
-        })
-          .then((searchResults) => {
-            results.value = searchResults;
+      if (query)
+        search(queries.join(" "), routeLocale.value, options)
+          .then((results) =>
+            searchFilter(results, query, routeLocale.value, pageData.value),
+          )
+          .then((_results) => {
+            results.value = _results;
             searching.value = false;
           })
           .catch((err) => {
@@ -46,9 +56,9 @@ export const useSearchResult = (query: Ref<string>): SearchRef => {
             endSearch();
           });
       else endSearch();
-    }, searchProOptions.searchDelay);
+    }, searchProOptions.searchDelay - searchProOptions.suggestDelay);
 
-    watch([query, routeLocale], () => performSearch(query.value), {
+    watch([queries, routeLocale], ([queries]) => performSearch(queries), {
       immediate: true,
     });
 

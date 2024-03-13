@@ -17,6 +17,8 @@ icon: lightbulb
 
 当索引不基于单词的语言时，例如中文、日语或韩语，你需要设置 `indexOptions` 和 `indexLocaleOptions` 以执行正确的分词，详见[自定义索引生成](#自定义索引生成)。
 
+同时为了更好的客户端搜索体验，你应该通过 `defineSearchConfig` 来自定义 `splitWord` 选项以对输入查询内容进行分词。
+
 :::
 
 ### 极致速度
@@ -285,7 +287,9 @@ export default defineClientConfig({
 
 ::: note
 
-由于搜索是在 Web Worker 中完成的，因此不支持设置选项为函数类型的值。
+由于搜索是在 Web Worker 中完成的，因此不支持 `slimsearch` 中需要被设置为函数的选项。
+
+为了提供建议和结果的过滤，我们额外提供了 `suggestFilter` 和 `searchFilter` 选项。你可以在这里设置一个函数来过滤建议和搜索结果。
 
 :::
 
@@ -296,11 +300,21 @@ export default defineClientConfig({
 ```ts
 import { createSearchWorker } from "vuepress-plugin-search-pro/client";
 
-const { search, terminate } = createSearchWorker();
+const { all, suggest, search, terminate } = createSearchWorker();
 
-// 使用搜索 API
+// 自动建议
+suggest("key").then((suggestions) => {
+  // 显示建议
+});
+
+// 搜素
 search("keyword").then((results) => {
-  // 使用结果
+  // 显示搜索结果
+});
+
+// 同时返回建议和搜索结果
+all("key").then(({ suggestions, results }) => {
+  // 显示建议和搜索结果
 });
 
 // 当不需要时终止 Worker
