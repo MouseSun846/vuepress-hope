@@ -2,6 +2,8 @@ import { values } from "@vuepress/helper/client";
 import type { SearchOptions } from "slimsearch";
 import { ref } from "vue";
 
+import { store } from "@temp/search-pro/store.js";
+
 import type { IndexItem } from "../../shared/index.js";
 import { clientWorker, searchProOptions } from "../define.js";
 import type { QueryResult, SearchResult } from "../typings/index.js";
@@ -70,9 +72,10 @@ export interface SearchWorker {
   terminate: () => void;
 }
 
-const userToken = ref<string>("");
+const courseInfoList = ref<Array<string>>([]);
 
-export const setUserToken = (token: string) => (userToken.value = token);
+export const setCourseInfo = (courseInfo: Array<string>) =>
+  (courseInfoList.value = courseInfo);
 
 export const createSearchWorker = (): SearchWorker => {
   // Service worker with module only works on webkit browsers now, so we only used it in dev
@@ -108,6 +111,38 @@ export const createSearchWorker = (): SearchWorker => {
           if (i > index) item.reject(new Error("Search has been canceled."));
         });
         queues[type] = queue.slice(index + 1);
+
+        let dataLen = result.length;
+
+        for (let i = 0; i < dataLen; i) {
+          let contentLen = result[i].contents.length;
+
+          for (let j = 0; j < contentLen; j) {
+            // 判断当前课程是否存在
+            let isExisted = false;
+
+            for (let k = 0; k < courseInfoList.value.length; k++)
+              if (
+                store[result[i].contents[j].id].indexOf(
+                  courseInfoList.value[k],
+                ) !== -1
+              ) {
+                isExisted = true;
+                break;
+              }
+
+            // 不存在则删除data[i][j]
+            if (!isExisted) result[i].contents.splice(j, 1);
+            else j++;
+
+            contentLen = result[i].contents.length;
+          }
+          if (contentLen === 0) result.splice(i, 1);
+          else i++;
+
+          dataLen = result.length;
+        }
+
         resolve(result);
       }
     },

@@ -15,7 +15,5 @@ export const getSuggestions = (
     ...searchOptions,
   });
 
-  console.log("suggestions: ", suggestions);
-
   return suggestions.map(({ suggestion }) => suggestion);
 };
