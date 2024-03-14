@@ -122,7 +122,7 @@ export const createSearchWorker = (): SearchWorker => {
           dataLen = result.results.length;
           res = result.results;
         } else {
-          result.slice(0, result.length);
+          result.splice(0, result.length);
         }
 
         for (let i = 0; i < dataLen; i) {

@@ -80,7 +80,10 @@ export default defineComponent({
         })
         .filter((item): item is BreadCrumbConfig => item !== null);
 
-      if (breadcrumbConfig.length > 1) config.value = breadcrumbConfig;
+      if (breadcrumbConfig.length > 1) {
+        config.value = breadcrumbConfig;
+        config.value.splice(0, 1);
+      }
     };
 
     onMounted(() => {
