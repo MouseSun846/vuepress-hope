@@ -1,13 +1,13 @@
 import type { SlotsType, VNode } from "vue";
 import { defineComponent, h } from "vue";
-import { useRouteLocale, useRouter } from "vuepress/client";
+import { useRoute } from "vuepress/client";
 
 import CommonWrapper from "@theme-hope/components/CommonWrapper";
-import NotFoundHint from "@theme-hope/components/NotFoundHint";
 import SkipLink from "@theme-hope/components/SkipLink";
 import { useThemeLocaleData } from "@theme-hope/composables/index";
 
 import "../styles/not-found.scss";
+import "../styles/not-found-hint.scss";
 
 export default defineComponent({
   name: "NotFound",
@@ -17,8 +17,7 @@ export default defineComponent({
   }>,
 
   setup(_props, { slots }) {
-    const router = useRouter();
-    const routeLocale = useRouteLocale();
+    const route = useRoute();
     const themeLocale = useThemeLocaleData();
 
     return (): VNode[] => [
@@ -28,7 +27,15 @@ export default defineComponent({
           "main",
           { id: "main-content", class: "vp-page not-found" },
           slots.default?.() || [
-            h(NotFoundHint),
+            h("div", { class: "not-found-hint" }, [
+              h(
+                "p",
+                { class: "error-hint" },
+                Array.isArray(route.query["tip"])
+                  ? ""
+                  : route.query["tip"] || "",
+              ),
+            ]),
             h("div", { class: "actions" }, [
               h(
                 "button",
@@ -47,12 +54,15 @@ export default defineComponent({
                   type: "button",
                   class: "action-button",
                   onClick: () => {
-                    void router.push(
-                      themeLocale.value.home ?? routeLocale.value,
+                    window.open(
+                      Array.isArray(route.query["exterLink"])
+                        ? ""
+                        : route.query["exterLink"] || "",
+                      "_blank",
                     );
                   },
                 },
-                themeLocale.value.routeLocales.home,
+                "开通权限",
               ),
             ]),
           ],
