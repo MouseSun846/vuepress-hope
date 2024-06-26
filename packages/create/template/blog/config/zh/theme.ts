@@ -1,7 +1,7 @@
 import { hopeTheme } from "vuepress-theme-hope";
+
 import navbar from "./navbar.js";
 import sidebar from "./sidebar.js";
-import { MR_HOPE_AVATAR } from "./logo.js";
 
 export default hopeTheme({
   hostname: "https://mister-hope.github.io",
@@ -65,7 +65,10 @@ export default hopeTheme({
       Whatsapp: "https://example.com",
       Youtube: "https://example.com",
       Zhihu: "https://example.com",
-      MrHope: ["https://mister-hope.com", MR_HOPE_AVATAR],
+      VuePressThemeHope: {
+        icon: "https://theme-hope-assets.vuejs.press/logo.svg",
+        link: "https://theme-hope.vuejs.press",
+      },
     },
   },
 
@@ -88,8 +91,8 @@ export default hopeTheme({
   plugins: {
     blog: true,
 
-    // 在启用之前需要安装 @waline/client
-    // 警告: 这是一个仅供演示的测试服务器，在生产环境中请自行部署并使用自己的服务器！
+    // 启用之前需安装 @waline/client
+    // 警告: 这是一个仅供演示的测试服务，在生产环境中请自行部署并使用自己的服务！
     // comment: {
     //   provider: "Waline",
     //   serverURL: "https://waline-comment.vuejs.press",
@@ -111,6 +114,8 @@ export default hopeTheme({
       imgSize: true,
       include: true,
       mark: true,
+      plantuml: true,
+      spoiler: true,
       stylize: [
         {
           matcher: "Recommended",
@@ -127,6 +132,7 @@ export default hopeTheme({
       sub: true,
       sup: true,
       tabs: true,
+      tasklist: true,
       vPre: true,
 
       // 在启用之前安装 chart.js
@@ -172,7 +178,7 @@ export default hopeTheme({
     // pwa: {
     //   favicon: "/favicon.ico",
     //   cacheHTML: true,
-    //   cachePic: true,
+    //   cacheImage: true,
     //   appendBase: true,
     //   apple: {
     //     icon: "/assets/icon/apple-icon-152.png",

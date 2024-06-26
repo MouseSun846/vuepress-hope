@@ -1,16 +1,16 @@
 import type { App } from "vuepress/core";
 import { fs, path } from "vuepress/utils";
 
-import type { SearchProOptions } from "./options.js";
+import type { SearchProPluginOptions } from "./options.js";
 import { WORKER_FILE } from "./utils.js";
 import type { SearchIndexStore } from "../shared/index.js";
 
 export const generateWorker = async (
   app: App,
-  options: SearchProOptions,
+  options: SearchProPluginOptions,
   searchStore: SearchIndexStore,
 ): Promise<void> => {
-  const workerFilePath = app.dir.dest(options.worker || "search-pro.worker.js");
+  const workerFilePath = app.dir.dest(options.worker ?? "search-pro.worker.js");
   const searchIndexContent = JSON.stringify(searchStore);
 
   const workerFileContent = await fs.readFile(WORKER_FILE, "utf8");
@@ -25,7 +25,7 @@ export const generateWorker = async (
       )
       .replace(
         "SEARCH_PRO_SORT_STRATEGY",
-        JSON.stringify(options.sortStrategy || "max"),
+        JSON.stringify(options.sortStrategy ?? "max"),
       ),
   );
 };

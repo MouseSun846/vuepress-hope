@@ -1,6 +1,6 @@
 import type { ThemePageFrontmatter } from "./base.js";
-import type { PageInfo } from "../info.js";
-import type { AutoLinkOptions } from "../utils.js";
+import type { PageInfoType } from "../info.js";
+import type { AutoLinkOptions } from "../nav.js";
 
 export interface ThemeNormalPageFrontmatter extends ThemePageFrontmatter {
   /**
@@ -59,6 +59,15 @@ export interface ThemeNormalPageFrontmatter extends ThemePageFrontmatter {
      * @default README.md 图标
      */
     icon?: string;
+
+    /**
+     * Whether dir is expanded by default
+     *
+     * 当前目录是否默认展开
+     *
+     * @default false
+     */
+    expanded?: boolean;
 
     /**
      * Whether Dir is collapsible
@@ -167,7 +176,7 @@ export interface ThemeNormalPageFrontmatter extends ThemePageFrontmatter {
    *
    * @default ["Author", "Visitor", "Time", "Category", "Tag", "ReadTime"]
    */
-  pageInfo?: PageInfo[] | false;
+  pageInfo?: PageInfoType[] | false;
 
   /**
    * Whether enable breadcrumb
@@ -182,6 +191,13 @@ export interface ThemeNormalPageFrontmatter extends ThemePageFrontmatter {
    * 是否启用路径导航图标
    */
   breadcrumbIcon?: boolean;
+
+  /**
+   * Whether exclude current page in breadcrumb
+   *
+   * 是否在路径导航中排除
+   */
+  breadcrumbExclude?: boolean;
 
   /**
    *

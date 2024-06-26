@@ -20,13 +20,14 @@ export const getSEOPlugin = (
   // Disable seo if `hostname` is not set and no options for seo plugin
   if (!keys(seoOptions).length && !hostname) return null;
 
+  const author = themeData.author ?? themeData.locales["/"]?.author;
+
   return seoPlugin({
     hostname,
-    ...(themeData.author ? { author: themeData.author } : {}),
+    ...(author ? { author } : {}),
     isArticle: ({ filePathRelative, frontmatter }: Page): boolean =>
-      Boolean(filePathRelative) &&
-      !frontmatter["home"] &&
-      frontmatter["article"] !== false,
+      (frontmatter["article"] as boolean | undefined) ??
+      (Boolean(filePathRelative) && !frontmatter["home"]),
     ...seoOptions,
   });
 };

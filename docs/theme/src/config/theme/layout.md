@@ -24,13 +24,6 @@ For related guide, please see [Layout → Navbar](../../guide/layout/navbar.md).
 
 Navbar config
 
-### navbarIcon
-
-- Type: `boolean`
-- Default: `true`
-
-Whether display icons in navbar.
-
 ### navbarLayout
 
 - Type: `NavbarLayoutOptions`
@@ -75,12 +68,12 @@ Navbar logo, should be absolute path relative to `.vuepress/public` folder.
 
 Navbar logo in darkmode, should be absolute path relative to `.vuepress/public` folder.
 
-### navTitle
+### navbarTitle
 
-- Type: `string | false`
+- Type: `string`
 - Default: `$siteLocale.title`
 
-Navbar title
+Navbar title, you can set it to an empty string to hide it.
 
 ### repo
 
@@ -133,13 +126,6 @@ For guide, see [Layout → Sidebar](../../guide/layout/sidebar.md).
 - Default: `"structure"`
 
 Sidebar Config.
-
-### sidebarIcon
-
-- Type: `boolean`
-- Default: `true`
-
-Whether show icons in the sidebar
 
 ### sidebarSorter <Badge text="Root only" type="warning" />
 

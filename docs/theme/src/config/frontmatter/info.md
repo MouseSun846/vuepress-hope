@@ -110,7 +110,7 @@ Set the label of the current page.
 ## license
 
 - Type: `string`
-- Default value: value in theme options
+- Default: value in theme options
 
 The license information. A license text will be displayed on footer with the license when it's set.
 
@@ -144,9 +144,16 @@ Whether to add the article to the article list.
 
 Whether to add the article to the timeline list.
 
-## image
+## cover
 
 - Type: `string`
 - Required: No
 
 Current page's image, needs an absolute path.
+
+## banner
+
+- Type: `string`
+- Required: No
+
+Current page's banner image, needs an absolute path.

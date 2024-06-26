@@ -26,7 +26,7 @@ export default defineComponent({
         h(
           "main",
           { id: "main-content", class: "vp-page not-found" },
-          slots.default?.() || [
+          slots.default?.() ?? [
             h("div", { class: "not-found-hint" }, [
               h(
                 "p",

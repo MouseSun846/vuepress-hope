@@ -19,7 +19,6 @@ tag:
 - CodePen
 - FontIcon
 - PDF
-- Replit
 - Share
 - StackBlitz
 - SiteInfo
@@ -40,43 +39,7 @@ tag:
 
 :::
 
-::: code-tabs#language
-
-@tab TS
-
-```ts {8-10} title=".vuepress/config.ts"
-import { defineUserConfig } from "vuepress";
-import { hopeTheme } from "vuepress-theme-hope";
-
-export default defineUserConfig({
-  theme: hopeTheme({
-    plugins: {
-      components: {
-        // 你想使用的组件
-        components: [
-          "ArtPlayer",
-          "Badge",
-          "BiliBili",
-          "CodePen",
-          "PDF",
-          "Replit",
-          "Share",
-          "SiteInfo",
-          "StackBlitz",
-          "VPBanner",
-          "VPCard",
-          "VidStack",
-          "XiGua",
-        ],
-      },
-    },
-  }),
-});
-```
-
-@tab JS
-
-```js {7-9} title=".vuepress/config.js"
+```js {8-22} title=".vuepress/config.js"
 import { hopeTheme } from "vuepress-theme-hope";
 
 export default {
@@ -90,7 +53,6 @@ export default {
           "BiliBili",
           "CodePen",
           "PDF",
-          "Replit",
           "Share",
           "SiteInfo",
           "StackBlitz",
@@ -104,8 +66,6 @@ export default {
   }),
 };
 ```
-
-:::
 
 ## 杂项
 
@@ -147,9 +107,9 @@ export default {
 
 ## 媒体
 
-## VidStack
+### VidStack
 
-> 先安装 `vidstack@1` 。
+> 先安装 `vidstack@next` 。
 
 <!-- @include: @components/zh/guide/media/vid-stack.md#demo -->
 
@@ -188,12 +148,6 @@ PDF 浏览器组件。
 <!-- @include: @components/zh/guide/code/code-pen.md#demo -->
 
 有关可用属性，请参阅 <ProjectLink name="components" path="/zh/guide/code/code-pen.html">CodePen</ProjectLink> 页面。
-
-### Replit
-
-<!-- @include: @components/zh/guide/code/repl-it.md#demo -->
-
-有关可用属性，请参阅 <ProjectLink name="components" path="/zh/guide/code/repl-it.html">Replit</ProjectLink> 页面。
 
 ### StackBlitz
 

@@ -2,13 +2,13 @@ import { isArray, isPlainObject } from "@vuepress/helper";
 import { colors } from "vuepress/utils";
 import { createConverter } from "vuepress-shared/node";
 
-import type { MarkdownEnhanceOptions } from "../options.js";
+import type { MarkdownEnhancePluginOptions } from "../options.js";
 import type { RevealJsPlugin } from "../typings/index.js";
 import { logger } from "../utils.js";
 
 /** @deprecated */
 export const convertOptions = (
-  options: MarkdownEnhanceOptions & Record<string, unknown>,
+  options: MarkdownEnhancePluginOptions & Record<string, unknown>,
 ): void => {
   const { deprecatedLogger, droppedLogger } = createConverter("md-enhance");
 
@@ -100,7 +100,7 @@ export const convertOptions = (
       )} from "vuepress-plugin-components" and use it instead.`,
     );
 
-  if (isPlainObject(options["mermaid"])) {
+  if (isPlainObject(options.mermaid)) {
     logger.error(
       `Customizing mermaid with option ${colors.magenta(
         "mermaid",
@@ -108,7 +108,7 @@ export const convertOptions = (
         "defineMermaidConfig",
       )} from ${colors.magenta("vuepress-plugin-md-enhance/client")} instead.`,
     );
-    options["mermaid"] = true;
+    options.mermaid = true;
   }
 
   if (options["presentation"]) {
@@ -123,7 +123,7 @@ export const convertOptions = (
     if (isPlainObject(options["presentation"])) {
       if ("plugins" in options["presentation"])
         options.revealJs = {
-          plugins: <RevealJsPlugin[]>options["presentation"]["plugins"],
+          plugins: options["presentation"]["plugins"] as RevealJsPlugin[],
         };
       else options.revealJs = true;
 
@@ -139,14 +139,14 @@ export const convertOptions = (
         );
     } else if (isArray(options["presentation"])) {
       options.revealJs = {
-        plugins: <RevealJsPlugin[]>options["presentation"],
+        plugins: options["presentation"] as RevealJsPlugin[],
       };
     }
 
     delete options["presentation"];
   }
 
-  if (isPlainObject(options["vuePlayground"])) {
+  if (isPlainObject(options.vuePlayground)) {
     logger.error(
       `Customizing @vue/repl with option ${colors.magenta(
         "vuePlayground",
@@ -154,6 +154,6 @@ export const convertOptions = (
         "defineVuePlaygroundConfig",
       )} from ${colors.magenta("vuepress-plugin-md-enhance/client")} instead.`,
     );
-    options["vuePlayground"] = true;
+    options.vuePlayground = true;
   }
 };

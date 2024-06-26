@@ -25,8 +25,8 @@ export default [
         "components/SandPack",
         "components/Tabs",
         "components/VuePlayground",
-        "composables/hint",
-        "composables/katex",
+        "composables/useHintContainers",
+        "composables/useKatexCopy",
         "SlidePage",
       ],
     },
@@ -35,6 +35,7 @@ export default [
       external: [
         "@vue/repl",
         "@vue/repl/codemirror-editor",
+        "@vue/repl/monaco-editor",
         "balloon-css/balloon.css",
         "chart.js/auto",
         "echarts",

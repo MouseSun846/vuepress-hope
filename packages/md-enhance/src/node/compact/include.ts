@@ -3,7 +3,7 @@ import type {
   MarkdownItIncludeOptions,
 } from "@mdit/plugin-include";
 import type { PluginWithOptions } from "markdown-it";
-import type { RuleCore } from "markdown-it/lib/parser_core.js";
+import type { RuleCore } from "markdown-it/lib/parser_core.mjs";
 import type { MarkdownEnv } from "vuepress/markdown";
 import { fs, path } from "vuepress/utils";
 
@@ -40,7 +40,7 @@ const REGIONS_RE = [
   /^# ?((?:end)?region) ([\w*-]+)$/u, // C#, PHP, Powershell, Python, perl & misc
 ];
 
-// Regexp to match the import syntax
+// RegExp to match the import syntax
 const INCLUDE_RE =
   /^@include\(([^)]+(?:\.[a-z0-9]+))(?:#([\w-]+))?(?:\{(\d+)?-(\d+)?\})?\)$/u;
 
@@ -66,7 +66,7 @@ const testLine = (
   regionName: string,
   end = false,
 ): boolean => {
-  const [full, tag, name] = regexp.exec(line.trim()) || [];
+  const [full, tag, name] = regexp.exec(line.trim()) ?? [];
 
   return Boolean(
     full &&
@@ -212,7 +212,7 @@ export const resolveInclude = (
 export const createIncludeCoreRule =
   (options: Required<Omit<MarkdownItIncludeOptions, "useComment">>): RuleCore =>
   (state): void => {
-    const env = <IncludeEnv & MarkdownEnv>state.env;
+    const env = state.env as IncludeEnv & MarkdownEnv;
     const includedFiles = (env.includedFiles ||= []);
     const currentPath = options.currentPath(env);
 
@@ -228,19 +228,20 @@ export const legacyInclude: PluginWithOptions<MarkdownItIncludeOptions> = (
   md,
   options,
 ): void => {
+  if (!options || typeof options.currentPath !== "function") {
+    logger.error('[include]: "currentPath" is required');
+
+    return;
+  }
+
   const {
     currentPath,
     resolvePath = (path: string): string => path,
     deep = false,
     resolveLinkPath = true,
     resolveImagePath = true,
-  } = options || {};
+  } = options;
 
-  if (typeof currentPath !== "function") {
-    logger.error('[include]: "currentPath" is required');
-
-    return;
-  }
   // Add md_import core rule
   md.core.ruler.after(
     "normalize",

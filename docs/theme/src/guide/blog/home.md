@@ -10,16 +10,16 @@ tag:
   - Layout
 ---
 
-`vuepress-theme-hope` allows you to enable a blog-style homepage.
-
-You need to set `layout: BlogHome` and `home: true` in the frontmatter of homepage.
+`vuepress-theme-hope` allows you to enable a blog-style and a portfolio style homepage.
 
 <!-- more -->
 
+## Blog Style Homepage
+
+Set `layout: BlogHome` and `home: true` in the frontmatter of homepage.
+
 ![Homepage screenshot](./assets/blog-light.jpg#light)
 ![Homepage screenshot](./assets/blog-dark.jpg#dark)
-
-## Homepage information
 
 You can use `heroText` to set the main title and `tagline` to set the subtitle.
 
@@ -29,11 +29,7 @@ You can set the background image through `bgImage` and `bgImageDark`, but you ne
 
 If you need to customize some styles, you can set the style of the logo and background image through `heroImageStyle` and `bgImageStyle`.
 
-## Project Display
-
-Typically, you might want to display some projects, books, articles, links, friend links, etc. on your homepage.
-
-You can set them via `projects`, which is an array where each element is an object with the following keys:
+Typically, you might want to display some projects, books, articles, links, friend links, etc. on your homepage. You can set them via `projects`, which is an array where each element is an object with the following keys:
 
 - `name`: required, project name
 - `link`: required, project link, fill in an external path or absolute path
@@ -48,7 +44,9 @@ For complete configuration items, see [Blog Home Frontmatter Configuration](../.
 
 :::
 
-## Living Demo
+::: info Living Demo
 
 - [A blog homepage for current docs](../../demo/blog-home.md)
 - [A customized blog homepage for current docs](../../demo/custom-blog-home.md)
+
+:::

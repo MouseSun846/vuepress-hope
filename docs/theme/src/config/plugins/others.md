@@ -37,7 +37,6 @@ Available component which can be used in markdown files are:
 - `"CodePen"`
 - `"FontIcon"`
 - `"PDF"`
-- `"Replit"`
 - `"Share"`
 - `"StackBlitz"`
 - `"VPBanner"`
@@ -60,10 +59,6 @@ No extra config is required by default. Se it to `false` if you don't need it.
 
 Check [copy-code plugin docs][copy-code-config] for available plugin options.
 
-## externalLinkIcon <Badge text="enabled by default" />
-
-Controls whether enable `@vuepress/external-link-icon` or not, only accept boolean value.
-
 ## git <Badge text="enabled in production" />
 
 Controls `@vuepress/plugin-git` which provides page meta via Git.
@@ -84,27 +79,27 @@ Controls `@vuepress/plugin-nprogress` which provides a progress bar through `npr
 
 You can set `false` to disable it.
 
-## prismjs <Badge text="enabled by default" />
+## prismjs
 
 Controls `@vuepress/plugin-prismjs` which provides code block highlighting via `prismjs`.
 
-You can set `false` to disable it and highlight code blocks yourself or with other plugins.
+You can set all available options in `@vuepress/plugin-prismjs` here, additionally with the following options:
 
-### prismjs.light
-
-- Type: `PrismjsTheme`
-- Default: `"one-light"`
-- Details: [Interface → Code Themes](../../guide/interface/code-theme.md)
-
-Prism.js theme used in lightmode.
-
-### prismjs.dark
+### prismjs.theme
 
 - Type: `PrismjsTheme`
-- Default: `"one-dark"`
-- Details: [Interface → Code Themes](../../guide/interface/code-theme.md)
+- Required: No
+- Details: [Interface → Code Themes](../../guide/feature/code-block.md#prismjs)
 
-Prism.js theme used in darkmode.
+Prism.js theme config. Available theme keywords can be found in [Prism.js Themes](../../guide/feature/code-block.md#prismjs).
+
+### prismjs.themes
+
+- Type: `{ light: PrismjsTheme, dark: PrismjsTheme }`
+- Default: `{ light: "one-light", dark: "one-dark" }`
+- Details: [Interface → Code Themes](../../guide/feature/code-block.md#prismjs)
+
+Prism.js dual theme config. Available theme keywords can be found in [Prism.js Themes](../../guide/feature/code-block.md#prismjs).
 
 ## photoSwipe <Badge text="enabled by default" />
 
@@ -151,13 +146,20 @@ No extra config is required by default. Se it to `false` if you don't need it.
 
 Check [sitemap plugin docs][sitemap-config] for available plugin options.
 
+## watermark
+
+Controls `@vuepress/plugin-watermark` which provides watermark.
+
+Check [watermark plugin docs][watermark-config] for available plugin options.
+
 [back-to-top-config]: https://ecosystem.vuejs.press/plugins/back-to-top.html#options
-[catalog-config]: https://ecosystem.vuejs.press/plugins/catalog.html#options
-[copy-code-config]: https://ecosystem.vuejs.press/plugins/copy-code.html#options
-[git-config]: https://ecosystem.vuejs.press/plugins/git.html#options
-[links-check-config]: https://ecosystem.vuejs.press/plugins/links-check.html#options
-[photo-swipe-config]: https://ecosystem.vuejs.press/plugins/photo-swipe.html#options
-[pwa-config]: https://ecosystem.vuejs.press/plugins/pwa/config.html#options
-[reading-time-config]: https://ecosystem.vuejs.press/plugins/reading-time.html#options
-[seo-config]: https://ecosystem.vuejs.press/plugins/sitemap/config.html
-[sitemap-config]: https://ecosystem.vuejs.press/plugins/seo/config.html
+[catalog-config]: https://ecosystem.vuejs.press/plugins/features/catalog.html#options
+[copy-code-config]: https://ecosystem.vuejs.press/plugins/features/copy-code.html#options
+[git-config]: https://ecosystem.vuejs.press/plugins/development/git.html#options
+[links-check-config]: https://ecosystem.vuejs.press/plugins/markdown/links-check.html#options
+[photo-swipe-config]: https://ecosystem.vuejs.press/plugins/features/photo-swipe.html#options
+[pwa-config]: https://ecosystem.vuejs.press/plugins/pwa/pwa/config.html#options
+[reading-time-config]: https://ecosystem.vuejs.press/plugins/development/reading-time.html#options
+[seo-config]: https://ecosystem.vuejs.press/plugins/seo/seo/config.html
+[sitemap-config]: https://ecosystem.vuejs.press/plugins/seo/sitemap/config.html
+[watermark-config]: https://ecosystem.vuejs.press/plugins/features/watermark.html

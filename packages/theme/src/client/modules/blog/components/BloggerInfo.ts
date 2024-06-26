@@ -5,13 +5,13 @@ import { RouteLink, useSiteLocaleData, withBase } from "vuepress/client";
 import { getAuthor } from "vuepress-shared/client";
 
 import { useNavigate, useThemeLocaleData } from "@theme-hope/composables/index";
-import SocialMedia from "@theme-hope/modules/blog/components/SocialMedia";
+import SocialMedias from "@theme-hope/modules/blog/components/SocialMedias";
 import {
   useArticles,
   useBlogOptions,
   useCategoryMap,
   useTagMap,
-  useTimelines,
+  useTimeline,
 } from "@theme-hope/modules/blog/composables/index";
 
 import "../styles/blogger-info.scss";
@@ -26,18 +26,18 @@ export default defineComponent({
     const articles = useArticles();
     const categoryMap = useCategoryMap();
     const tagMap = useTagMap();
-    const timelines = useTimelines();
+    const timelines = useTimeline();
     const navigate = useNavigate();
 
     const bloggerName = computed(
       () =>
-        blogOptions.value.name ||
-        getAuthor(themeLocale.value.author)[0]?.name ||
+        blogOptions.value.name ??
+        getAuthor(themeLocale.value.author)[0]?.name ??
         siteLocale.value.title,
     );
 
     const bloggerAvatar = computed(
-      () => blogOptions.value.avatar || themeLocale.value.logo,
+      () => blogOptions.value.avatar ?? themeLocale.value.logo,
     );
 
     const locale = computed(() => themeLocale.value.blogLocales);
@@ -67,7 +67,6 @@ export default defineComponent({
               class: "vp-blogger",
               ...(intro.value
                 ? {
-                    style: { cursor: "pointer" },
                     "aria-label": locale.value.intro,
                     "data-balloon-pos": "down",
                     role: "link",
@@ -78,10 +77,7 @@ export default defineComponent({
             [
               bloggerAvatar.value
                 ? h("img", {
-                    class: [
-                      "vp-blogger-avatar",
-                      { round: blogOptions.value.roundAvatar },
-                    ],
+                    class: "vp-blogger-avatar",
                     src: withBase(bloggerAvatar.value),
                     property: "image",
                     alt: "Blogger Avatar",
@@ -116,7 +112,7 @@ export default defineComponent({
               ]),
             ),
           ),
-          h(SocialMedia),
+          h(SocialMedias),
         ],
       );
     };

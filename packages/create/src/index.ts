@@ -6,18 +6,23 @@ import { cac } from "cac";
 import { execaCommand, execaCommandSync } from "execa";
 import inquirer from "inquirer";
 
-import type { Bundler, CreateLocale, Lang, Preset } from "./config/index.js";
+import type { Bundler, Preset } from "./config/index.js";
 import {
   bundlers,
   generateTemplate,
-  getLanguage,
   presets,
   version,
 } from "./config/index.js";
+import type { CreateLocale, Lang } from "./i18n/index.js";
+import { getLanguage } from "./i18n/index.js";
 import { createPackageJson } from "./packageJson.js";
-import { getRegistry } from "./registry.js";
+import { createTsConfig } from "./tsconfig.js";
 import type { PackageManager } from "./utils/index.js";
-import { ensureDirExistSync, getPackageManager } from "./utils/index.js";
+import {
+  ensureDirExistSync,
+  getPackageManager,
+  getRegistry,
+} from "./utils/index.js";
 
 interface CreateOptions {
   bundler?: Bundler | null;
@@ -148,6 +153,7 @@ cli
           cwd: targetDir,
           source: "src",
         });
+        createTsConfig({ cwd: targetDir, source: "src", locale });
         await generateTemplate({
           preset,
           lang,
@@ -190,6 +196,8 @@ cli
           locale,
           source: targetDir,
         });
+
+        createTsConfig({ source: targetDir, locale });
 
         await generateTemplate({
           packageManager,

@@ -10,11 +10,8 @@
   @include var.color($code-color: #383a42, $code-bg-color: #ecf4fa);
 }
 
-code[class*="language-"],
 pre[class*="language-"] {
   // tab size
-  -moz-tab-size: 2;
-  -o-tab-size: 2;
   tab-size: 2;
 
   // Selection
@@ -113,15 +110,13 @@ pre[class*="language-"] {
   color: #a626a4;
 }
 
-// stylelint-disable selector-max-compound-selectors
+// stylelint-disable-next-line selector-max-compound-selectors
 .language-javascript
   .token.template-string
   > .token.interpolation
   > .token.interpolation-punctuation.punctuation {
   color: #ca1243;
 }
-
-// stylelint-enable selector-max-compound-selectors
 
 /* JSON overrides */
 .language-json .token.operator {

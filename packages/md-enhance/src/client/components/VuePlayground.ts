@@ -13,12 +13,15 @@ import {
 import { LoadingIcon } from "vuepress-shared/client";
 
 import { useVuePlaygroundConfig } from "../helpers/index.js";
-import { getVuePlaygroundSettings } from "../utils/index.js";
+import type { VuePlaygroundOptions } from "../typings/index.js";
 
 import "@vue/repl/style.css";
 import "../styles/vue-playground.scss";
 
 declare const VUE_PLAYGROUND_MONACO: boolean;
+
+const getVuePlaygroundSettings = (settings: string): VuePlaygroundOptions =>
+  JSON.parse(decodeURIComponent(settings)) as VuePlaygroundOptions;
 
 export default defineComponent({
   name: "VuePlayground",
@@ -113,11 +116,11 @@ export default defineComponent({
             ? h(LoadingIcon, { class: "preview-loading", height: 192 })
             : null,
           component.value
-            ? h(component.value, <ReplProps>{
+            ? h(component.value, {
                 ...playgroundOptions.value,
                 editor: editor.value,
                 store: store.value,
-              })
+              } as ReplProps)
             : null,
         ]),
       ]),

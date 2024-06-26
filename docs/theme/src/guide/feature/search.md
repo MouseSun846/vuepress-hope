@@ -65,7 +65,10 @@ The theme adds built-in support for <ProjectLink name="search-pro">`vuepress-plu
            return helpers.docsearch({
              recordProps: {
                lvl0: {
-                 selectors: ".sidebar-heading.active",
+                 selectors: [
+                   ".vp-sidebar-page.active",
+                   ".theme-hope-content h1",
+                 ],
                  defaultValue: "Documentation",
                },
                lvl1: ".theme-hope-content h1",
@@ -76,7 +79,7 @@ The theme adds built-in support for <ProjectLink name="search-pro">`vuepress-plu
                lvl6: ".theme-hope-content h6",
                content: ".theme-hope-content p, .theme-hope-content li",
              },
-             indexHeadings: true,
+             recordVersion: "v3",
            });
          },
        },
@@ -188,11 +191,7 @@ The theme adds built-in support for <ProjectLink name="search-pro">`vuepress-plu
 
 1. Customize the plugin with `plugins.docsearch` in theme options.
 
-   ::: code-tabs#language
-
-   @tab TS
-
-   ```ts {8-11} title=".vuepress/config.ts"
+   ```js {7-10} title=".vuepress/config.js"
    import { defineUserConfig } from "vuepress";
    import { hopeTheme } from "vuepress-theme-hope";
 
@@ -207,26 +206,6 @@ The theme adds built-in support for <ProjectLink name="search-pro">`vuepress-plu
      }),
    });
    ```
-
-   @tab JS
-
-   ```js {8-11} title=".vuepress/config.js"
-   import { defineUserConfig } from "vuepress";
-   import { hopeTheme } from "vuepress-theme-hope";
-
-   export default defineUserConfig({
-     theme: hopeTheme({
-       plugins: {
-         docsearch: {
-           // plugin options here
-           // appId, apiKey and indexName are required
-         },
-       },
-     }),
-   });
-   ```
-
-   :::
 
 ::: info More
 
@@ -384,5 +363,5 @@ See [Plugin Docs][search] for available options.
 
 :::
 
-[docsearch]: https://ecosystem.vuejs.press/plugins/docsearch.html
-[search]: https://ecosystem.vuejs.press/plugins/search.html
+[docsearch]: https://ecosystem.vuejs.press/plugins/search/docsearch.html
+[search]: https://ecosystem.vuejs.press/plugins/search/search.html

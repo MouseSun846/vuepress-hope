@@ -12,7 +12,7 @@ tag:
 
 ## 要求
 
-- 环境: LTS 版本 的 Node.js（18、20）
+- 环境: LTS 版本 的 Node.js（>=18.19.0、20.x）
 - 包管理器: npm >= 8、yarn >= 2 或 pnpm >= 7
 - 使用 Vue3 的 VuePress2 项目
 
@@ -80,7 +80,7 @@ npm init vuepress-theme-hope@latest add [dir]
 
 @tab TS
 
-```ts {7} title=".vuepress/config.ts"
+```ts {6} title=".vuepress/config.ts"
 import { defineUserConfig } from "vuepress";
 import { hopeTheme } from "vuepress-theme-hope";
 
@@ -93,7 +93,7 @@ export default defineUserConfig({
 
 @tab JS
 
-```js {7} title=".vuepress/config.js"
+```js {5} title=".vuepress/config.js"
 import { hopeTheme } from "vuepress-theme-hope";
 
 export default {

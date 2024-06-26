@@ -16,7 +16,7 @@ import {
   registerMseDash,
   registerMseFlv,
   registerMseHls,
-} from "../utils/mse.js";
+} from "../utils/registerMse.js";
 
 import "../styles/art-player.scss";
 
@@ -229,12 +229,12 @@ export default defineComponent({
       BOOLEAN_TRUE_ATTRS.forEach((config) => {
         if (attrsKeys.includes(config))
           initOptions[
-            <ArtPlayerBooleanOptionKey>camelize(config.replace(/^no-/, ""))
+            camelize(config.replace(/^no-/, "")) as ArtPlayerBooleanOptionKey
           ] = false;
       });
       BOOLEAN_FALSE_ATTRS.forEach((config) => {
         if (attrsKeys.includes(config))
-          initOptions[<ArtPlayerBooleanOptionKey>camelize(config)] = true;
+          initOptions[camelize(config) as ArtPlayerBooleanOptionKey] = true;
       });
 
       // Auto config mse

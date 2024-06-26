@@ -88,11 +88,11 @@ This value can be greater than the actual memory size of your machine.
 
 With GitHub workflow, set `env` in your workflow file.
 
-```diff
-  - name: Build project
-+   env:
-+     NODE_OPTIONS: --max_old_space_size=8192
-    run: pnpm run build
+```yml
+- name: Build project
+  env: // [!code ++]
+    NODE_OPTIONS: --max_old_space_size=8192 // [!code ++]
+  run: pnpm run build
 ```
 
 On windows, you can follow [this guide](https://www.technewstoday.com/how-to-set-windows-environment-variables/).
@@ -169,6 +169,7 @@ To debug this, set `__VUE_PROD_HYDRATION_MISMATCH_DETAILS__` to `true` so that y
 If a component is likely to have different render results between SSR[^ssr] and CSR[^csr]. You can wrap your components with the `<ClientOnly />` component provided by `vuepress/client`.
 
 [^ssr]: **SSR**: **S**erver **S**ide **R**endering
+
 [^csr]: **CSR**: **C**lient **S**ide **R**endering
 
 ## HotReload not working in DevServer
@@ -213,7 +214,7 @@ import { defineUserConfig } from "vuepress";
 
 export default defineUserConfig({
   extendsBundlerOptions: (config, app) => {
-    addViteConfig(bundlerOptions, app, {
+    addViteConfig(config, app, {
       css: {
         postcss: {
           plugins: [postcssPresetEnv()],
@@ -233,7 +234,7 @@ import { defineUserConfig } from "vuepress";
 
 export default defineUserConfig({
   extendsBundlerOptions: (config, app) => {
-    configWebpack(bundlerOptions, app, (config) => {
+    configWebpack(config, app, (config) => {
       (((config.postcss ??= {}).postcssOptions ??= {}).plugins ??= []).push(
         postcssPresetEnv(),
       );

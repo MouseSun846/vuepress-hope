@@ -24,13 +24,6 @@ tag:
 
 导航栏配置，具体配置方式见上方详情。
 
-### navbarIcon
-
-- 类型: `boolean`
-- 默认值: `true`
-
-是否在导航栏显示图标。
-
 ### navbarLayout
 
 - 类型: `NavbarLayoutOptions`
@@ -75,12 +68,12 @@ tag:
 
 夜间模式下导航栏图标，应为基于 `.vuepress/public` 文件夹的绝对路径。
 
-### navTitle
+### navbarTitle
 
-- 类型: `string | false`
+- 类型: `string`
 - 默认值: `$siteLocale.title`
 
-导航栏标题
+导航栏标题，你可以设置为 `''` 来隐藏它。
 
 ### repo
 
@@ -133,13 +126,6 @@ tag:
 - 默认值: `"structure"`
 
 侧边栏配置。
-
-### sidebarIcon
-
-- 类型: `boolean`
-- 默认值: `true`
-
-是否在侧边栏显示图标。
 
 ### sidebarSorter <Badge text="仅限 Root" type="warning" />
 

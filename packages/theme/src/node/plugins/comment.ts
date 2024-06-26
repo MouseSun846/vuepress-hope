@@ -14,7 +14,7 @@ export const getCommentPlugin = (
 ): PluginObject | null => {
   if (options === false || !options?.provider) return null;
 
-  return commentPlugin(<CommentPluginOptions>{
+  return commentPlugin({
     provider: "None",
     ...(options?.provider === "Giscus"
       ? {
@@ -25,6 +25,6 @@ export const getCommentPlugin = (
     ...(options?.provider === "Waline"
       ? { dark: 'html[data-theme="dark"]' }
       : {}),
-    ...(options || {}),
-  });
+    ...options,
+  } as CommentPluginOptions);
 };

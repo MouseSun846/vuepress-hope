@@ -30,7 +30,6 @@ export default theme("md-enhance", {
       chart: true,
       codetabs: true,
       component: true,
-      container: true,
       demo: true,
       echarts: true,
       figure: true,
@@ -55,6 +54,7 @@ export default theme("md-enhance", {
       mark: true,
       markmap: true,
       mermaid: true,
+      plantuml: true,
       playground: {
         presets: ["ts", "vue", "unocss"],
       },
@@ -76,6 +76,7 @@ export default theme("md-enhance", {
         ],
       },
       sandpack: true,
+      spoiler: true,
       stylize: [
         {
           matcher: "Recommended",
@@ -98,6 +99,7 @@ export default theme("md-enhance", {
       sub: true,
       sup: true,
       tabs: true,
+      tasklist: true,
       vPre: true,
       vuePlayground: true,
     },

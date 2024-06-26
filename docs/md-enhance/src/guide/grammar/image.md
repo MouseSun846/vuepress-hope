@@ -9,11 +9,7 @@ Improve image syntax in Markdown to support color scheme and size.
 
 ## Settings
 
-::: code-tabs#language
-
-@tab TS
-
-```ts {7-14} title=".vuepress/config.ts"
+```js {7,9,11,13} title=".vuepress/config.js"
 import { mdEnhancePlugin } from "vuepress-plugin-md-enhance";
 
 export default {
@@ -31,29 +27,6 @@ export default {
   ],
 };
 ```
-
-@tab JS
-
-```js {7-14} title=".vuepress/config.js"
-import { mdEnhancePlugin } from "vuepress-plugin-md-enhance";
-
-export default {
-  plugins: [
-    mdEnhancePlugin({
-      // Enable figure
-      figure: true,
-      // Enable image lazyload
-      imgLazyload: true,
-      // Enable image mark
-      imgMark: true,
-      // Enable image size
-      imgSize: true,
-    }),
-  ],
-};
-```
-
-:::
 
 <!-- #region after -->
 
@@ -69,10 +42,7 @@ You can enable it using `imgMark` option.
 
 ::: md-demo Image mark demo
 
-<AppearanceSwitch /> (Try to toggle theme mode)
-
-![GitHub Light](/assets/image/github-light.svg#gh-dark-mode-only)
-![GitHub Dark](/assets/image/github-dark.svg#gh-light-mode-only)
+<ColorModeSwitch /> (Try to toggle theme mode)
 
 ![GitHub Light](/assets/image/github-light.svg#dark)
 ![GitHub Dark](/assets/image/github-dark.svg#light)
@@ -136,7 +106,7 @@ If the image is standalone in a line, wrapped or not wrapped by link, it will be
 <!-- markdownlint-enable MD034 -->
 
 <script setup lang="ts">
-import AppearanceSwitch from "@theme-hope/modules/outlook/components/AppearanceSwitch";
+import ColorModeSwitch from "@theme-hope/modules/outlook/components/ColorModeSwitch";
 </script>
 
 <!-- #endregion after -->

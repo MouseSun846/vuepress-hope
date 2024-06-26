@@ -1,4 +1,5 @@
 import { hopeTheme } from "vuepress-theme-hope";
+
 import navbar from "./navbar.js";
 import sidebar from "./sidebar.js";
 
@@ -39,7 +40,8 @@ export default hopeTheme({
   },
 
   plugins: {
-    // You should generate and use your own comment service
+    // Note: This is for testing ONLY!
+    // You MUST generate and use your own comment service in production.
     comment: {
       provider: "Giscus",
       repo: "vuepress-theme-hope/giscus-discussions",
@@ -64,6 +66,8 @@ export default hopeTheme({
       imgSize: true,
       include: true,
       mark: true,
+      plantuml: true,
+      spoiler: true,
       stylize: [
         {
           matcher: "Recommended",
@@ -80,6 +84,7 @@ export default hopeTheme({
       sub: true,
       sup: true,
       tabs: true,
+      tasklist: true,
       vPre: true,
 
       // install chart.js before enabling it
@@ -125,7 +130,7 @@ export default hopeTheme({
     // pwa: {
     //   favicon: "/favicon.ico",
     //   cacheHTML: true,
-    //   cachePic: true,
+    //   cacheImage: true,
     //   appendBase: true,
     //   apple: {
     //     icon: "/assets/icon/apple-icon-152.png",

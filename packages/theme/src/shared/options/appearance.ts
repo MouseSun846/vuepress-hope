@@ -84,6 +84,15 @@ export interface AppearanceOptions {
   darkmode?: DarkmodeOptions;
 
   /**
+   * Whether show external link icon
+   *
+   * 是否显示外部链接图标
+   *
+   * @default true
+   */
+  externalLinkIcon?: boolean;
+
+  /**
    * Whether enable theme color picker
    *
    * 是否启用主题色选择器
@@ -115,7 +124,7 @@ export interface AppearanceOptions {
    *
    * 字体图标资源链接
    *
-   * @description `"iconfont"` and `"fontawesome"` keywords are supported
+   * @description `"iconify"`, `"fontawesome"` and `"fontawesome-with-brands"` keywords are supported
    */
   iconAssets?: FontIconAssets;
 

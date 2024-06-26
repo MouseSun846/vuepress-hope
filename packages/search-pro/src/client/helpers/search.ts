@@ -42,13 +42,10 @@ export const useSearchOptions = (): ComputedRef<SearchLocaleOptions> => {
   const routeLocale = useRouteLocale();
   const { locales = {}, ...options } = inject(slimsearchSymbol)!;
 
-  return computed(
-    () =>
-      <SearchLocaleOptions>{
-        ...options,
-        ...(locales[routeLocale.value] || {}),
-      },
-  );
+  return computed(() => ({
+    ...options,
+    ...locales[routeLocale.value],
+  }));
 };
 
 export const injectSearchConfig = (app: App): void => {

@@ -11,7 +11,7 @@ import type { DocsearchPluginOptions } from "@vuepress/plugin-docsearch";
 import type { SearchPluginOptions } from "@vuepress/plugin-search";
 import type { App, Page, Plugin } from "vuepress/core";
 import { colors } from "vuepress/utils";
-import type { SearchProOptions } from "vuepress-plugin-search-pro";
+import type { SearchProPluginOptions } from "vuepress-plugin-search-pro";
 
 import type {
   PluginsOptions,
@@ -23,7 +23,7 @@ import { logger } from "../utils.js";
 
 let docsearchPlugin: (options: DocsearchPluginOptions) => Plugin;
 let searchPlugin: (options: SearchPluginOptions) => Plugin;
-let searchProPlugin: (options: SearchProOptions) => Plugin;
+let searchProPlugin: (options: SearchProPluginOptions) => Plugin;
 let cut: (content: string, strict?: boolean | undefined) => string[];
 
 try {
@@ -101,7 +101,7 @@ export const getSearchPlugin = (
   themeData: ThemeData,
   plugins: PluginsOptions,
 ): Plugin | null => {
-  const encryptedPaths = keys(themeData.encrypt.config || {});
+  const encryptedPaths = keys(themeData.encrypt.config ?? {});
   const isPageEncrypted = ({ path }: Page): boolean =>
     encryptedPaths.some((key) => startsWith(decodeURI(path), key));
   const { locales } = app.options;

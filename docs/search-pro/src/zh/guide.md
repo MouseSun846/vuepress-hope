@@ -35,7 +35,7 @@ icon: lightbulb
 
 ### 查询和搜索的历史记录
 
-插件将显示您最后输入的 5 个查询和您选择的最后 5 个搜索结果。此行为可以通过设置 `queryHistoryCount` 和 `resultHistoryCount` 选项来改变。你可以将它们设置为 `0` 来禁用它们。
+插件将显示你最后输入的 5 个查询和你选择的最后 5 个搜索结果。此行为可以通过设置 `queryHistoryCount` 和 `resultHistoryCount` 选项来改变。你可以将它们设置为 `0` 来禁用它们。
 
 ### 完整键盘支持
 
@@ -344,6 +344,6 @@ terminate();
 
 在大多数情况，如果你在构建一个大型站点，你应该选择服务提供商为你的站点提供搜索服务，例如 [Algolia](https://www.algolia.com/)，或者选择开源工具在自己的服务器上加载搜索服务并定期为自己的网站生成索引。对于大型站点这很必要因为用户通过网络请求向搜索 API 发送搜索字词，并直接得到搜索结果。
 
-特别提示，[DocSearch](https://docsearch.algolia.com/) 是 Algolia 为开源项目提供的免费搜索服务。如果你在创建开源项目文档或开源技术博客，你可 [申请它](https://docsearch.algolia.com/apply/)，并使用 [`@vuepress/plugin-docsearch`](https://ecosystem.vuejs.press/zh/plugins/docsearch.html) 插件提供搜索。
+特别提示，[DocSearch](https://docsearch.algolia.com/) 是 Algolia 为开源项目提供的免费搜索服务。如果你在创建开源项目文档或开源技术博客，你可 [申请它](https://docsearch.algolia.com/apply/)，并使用 [`@vuepress/plugin-docsearch`](https://ecosystem.vuejs.press/zh/plugins/search/docsearch.html) 插件提供搜索。
 
 [client-config]: https://vuejs.press/zh/guide/configuration.html#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6

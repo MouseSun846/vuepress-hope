@@ -1,3 +1,4 @@
+import type { MarkdownItPlantumlOptions } from "@mdit/plugin-plantuml";
 import type { LocaleConfig } from "vuepress/shared";
 
 import type {
@@ -19,7 +20,7 @@ import type { CodeDemoOptions } from "../shared/index.js";
 /**
  * md-enhance plugin configuration
  */
-export interface MarkdownEnhanceOptions {
+export interface MarkdownEnhancePluginOptions {
   /**
    * Whether enable standard GFM support
    *
@@ -216,6 +217,15 @@ export interface MarkdownEnhanceOptions {
   mark?: boolean;
 
   /**
+   * Whether to enable spoiler support
+   *
+   * 是否启用剧透支持
+   *
+   * @default false
+   */
+  spoiler?: boolean;
+
+  /**
    * Whether to enable tasklist format support
    *
    * 是否启用任务列表支持
@@ -321,6 +331,15 @@ export interface MarkdownEnhanceOptions {
    * @default false
    */
   mermaid?: boolean;
+
+  /**
+   * Whether enable plantuml support
+   *
+   * 是否启用 plantuml 支持
+   *
+   * @default false
+   */
+  plantuml?: MarkdownItPlantumlOptions[] | boolean;
 
   /**
    * Whether to enable code-demo support

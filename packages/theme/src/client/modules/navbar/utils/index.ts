@@ -1,10 +1,9 @@
 import type {
   AutoLinkOptions,
   NavGroup,
-  NavbarItem,
+  NavbarLinkOptions,
 } from "../../../../shared/index.js";
 
-// Resolved
-export type ResolvedThemeNavbarItem =
-  | NavbarItem
+export type NavbarItem =
+  | NavbarLinkOptions
   | NavGroup<AutoLinkOptions | NavGroup<AutoLinkOptions>>;

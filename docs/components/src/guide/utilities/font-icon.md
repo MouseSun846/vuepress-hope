@@ -59,7 +59,7 @@ You should set icon related assets to `componentsOptions.fontIcon.assets`, where
 
 For example, you may use [iconfont.cn](https://www.iconfont.cn/?lang=en-us) and [fontawesome](https://fontawesome.com) to generate your own assets.
 
-To keep it simple, we add built-in keywords `"iconfont"`, `"iconify"`, `"fontawesome"` and `"fontawesome-with-brand` support for you to get started easily.
+To keep it simple, we add built-in keywords `"iconify"`, `"fontawesome"` and `"fontawesome-with-brand` support for you to get started easily.
 
 ::: caution
 
@@ -81,13 +81,7 @@ In other cases where you use iconify or your own url, you can manually set this 
 
 - Iconify: <https://icon-sets.iconify.design/>
 - Iconfont: <https://www.iconfont.cn/?lang=en-us>
-- Fontawesome: <https://fontawesome.com/icons>
-
-::: details Featured Icons with iconfont keyword
-
-<IconDisplay link="//at.alicdn.com/t/c/font_2410206_5vb9zlyghj.css" />
-
-:::
+- Fontawesome: <https://fontawesome.com/search?o=r&m=free>
 
 ## Advanced
 
@@ -166,10 +160,6 @@ Fontawesome kits with pro features support pro icons, more icon styles and uploa
 For details, please follow [fontawesome document](https://fontawesome.com/).
 
 - [Usage Instructions](https://fontawesome.com/docs/web/add-icons/how-to)
-- [Icon List](https://fontawesome.com/icons)
+- [Icon List](https://fontawesome.com/search?o=r&m=free)
 
 :::
-
-<script setup lang="ts">
-import IconDisplay from "@IconDisplay";
-</script>

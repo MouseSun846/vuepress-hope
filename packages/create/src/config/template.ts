@@ -8,8 +8,8 @@ import inquirer from "inquirer";
 import type { Preset } from "./config.js";
 import { presets } from "./config.js";
 import { updateGitIgnore } from "./gitignore.js";
-import type { CreateLocale, Lang } from "./i18n.js";
 import { getWorkflowContent } from "./workflow.js";
+import type { CreateLocale, Lang } from "../i18n/index.js";
 import type { PackageManager } from "../utils/index.js";
 import {
   checkGitInstalled,
@@ -44,7 +44,6 @@ export const generateTemplate = async ({
     i18n: boolean;
     workflow: boolean;
   }>([
-    // TODO: Support it
     {
       name: "i18n",
       type: "confirm",
@@ -116,18 +115,6 @@ export const generateTemplate = async ({
     );
   }
 
-  if (workflow) {
-    const workflowDir = resolve(cwd, ".github/workflows");
-
-    ensureDirExistSync(workflowDir);
-
-    writeFileSync(
-      resolve(workflowDir, "deploy-docs.yml"),
-      getWorkflowContent(packageManager, targetDir, lang),
-      { encoding: "utf-8" },
-    );
-  }
-
   // Git related
   const isGitRepo = checkGitRepo(cwd);
 
@@ -146,8 +133,20 @@ export const generateTemplate = async ({
     ]);
 
     if (git) {
-      execaCommandSync("git init", { cwd });
+      execaCommandSync("git init -b main", { cwd });
       updateGitIgnore(targetDir, cwd);
     }
+  }
+
+  if (workflow) {
+    const workflowDir = resolve(cwd, ".github/workflows");
+
+    ensureDirExistSync(workflowDir);
+
+    writeFileSync(
+      resolve(workflowDir, "deploy-docs.yml"),
+      getWorkflowContent(packageManager, cwd, targetDir, locale),
+      { encoding: "utf-8" },
+    );
   }
 };

@@ -148,6 +148,15 @@ order: 2
 
 是否启用自定义属性支持。
 
+## spoiler
+
+- 类型: `boolean`
+- 默认值: `false`
+- 详情:
+  - [剧透](./guide/stylize/spoiler.md)
+
+是否启用剧透支持。
+
 ### sup
 
 - 类型: `boolean`
@@ -346,7 +355,7 @@ order: 2
 - 类型: `boolean`
 - 默认值: `false`
 - 详情:
-  - [Echarts](./guide/chart/echarts.md)
+  - [ECharts](./guide/chart/echarts.md)
 
 是否启用 ECharts 图表支持。
 
@@ -377,6 +386,15 @@ order: 2
   - [Mermaid](./guide/chart/mermaid.md)
 
 是否启用 [Mermaid](https://mermaid.js.org/) 支持。
+
+### plantuml
+
+- 类型: `MarkdownItPlantumlOptions[] | boolean`
+- 默认值: `false`
+- 详情:
+  - [Plantuml](./guide/chart/plantuml.md)
+
+是否启用 [plantuml](https://plantuml.com/zh/) 支持。
 
 ### stylize
 
@@ -794,25 +812,25 @@ Markdown 增强插件的国际化配置。
 
 ## 客户端配置
 
-### defineEchartsConfig
+### defineEChartsConfig
 
 ```ts
-interface EchartsConfig {
+interface EChartsConfig {
   /**
-   * Echarts 全局选项
+   * ECharts 全局选项
    */
   option?: EChartsOption;
 
   /**
-   * Echarts 初始化函数
+   * ECharts 初始化函数
    */
   setup?: () => Promise<void>;
 }
 
-const defineEchartsConfig: (config: EchartsConfig) => void;
+const defineEChartsConfig: (config: EChartsConfig) => void;
 ```
 
-定义需要传递给 Echarts 的全局配置选项和设置函数。
+定义需要传递给 ECharts 的全局配置选项和设置函数。
 
 ### defineMermaidConfig
 

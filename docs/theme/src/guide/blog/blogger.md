@@ -26,12 +26,6 @@ If you don't set those options, they automatically fall back to the site logo (`
 
 :::
 
-::: tip
-
-If you want the avatar to be clipped with round shape, set `blog.roundAvatar: true`.
-
-:::
-
 ## Motto, Social Media & Profile Link
 
 You can use `blog.description` to set your own introduction, motto or slogan.
@@ -173,19 +167,19 @@ export default defineUserConfig({
         // GitHub Icon is available
         GitHub: "https://github.com/Mister-Hope",
         // A custom Media called "MediaX" (just an example)
-        MediaX: [
-          // link
-          "https://mediax.com/UserX/",
+        MediaX: {
           // icon string
-          "<svg ....</svg>",
-        ],
-        // A custom Media called "MediaY" (just an example)
-        MediaY: [
+          icon: "<svg ....</svg>",
           // link
-          "https://mediay.com/UserY/",
+          link: "https://mediax.com/UserX/",
+        },
+        // A custom Media called "MediaY" (just an example)
+        MediaY: {
           // icon path
-          path.resolve(__dirname, "icons/mediay.svg"),
-        ],
+          icon: "https://mediay.com/logo.svg",
+          // link
+          link: "https://mediay.com/UserY/",
+        },
       },
     },
   }),
@@ -207,19 +201,19 @@ export default {
         // GitHub Icon is available
         GitHub: "https://github.com/Mister-Hope",
         // A custom Media called "MediaX" (just an example)
-        MediaX: [
-          // link
-          "https://mediax.com/UserX/",
+        MediaX: {
           // icon string
-          "<svg ....</svg>",
-        ],
-        // A custom Media called "MediaY" (just an example)
-        MediaY: [
+          icon: "<svg ....</svg>",
           // link
-          "https://mediay.com/UserY/",
+          link: "https://mediax.com/UserX/",
+        },
+        // A custom Media called "MediaY" (just an example)
+        MediaY: {
           // icon path
-          path.resolve(__dirname, "icons/mediay.svg"),
-        ],
+          icon: "https://mediay.com/logo.svg",
+          // link
+          link: "https://mediay.com/UserY/",
+        },
       },
     },
   }),

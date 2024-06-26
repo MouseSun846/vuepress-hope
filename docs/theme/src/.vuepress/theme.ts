@@ -1,27 +1,59 @@
 import { theme } from "docs-shared";
 import { getDirname, path } from "vuepress/utils";
 import { AVAILABLE_SERVICES } from "vuepress-plugin-components";
+import { getRecentUpdatedArticles } from "vuepress-theme-hope/presets/getRecentUpdatedArticles.js";
+import { getSlides } from "vuepress-theme-hope/presets/getSlides.js";
 
 import { enNavbarConfig, zhNavbarConfig } from "./navbar/index.js";
 import { enSidebarConfig, zhSidebarConfig } from "./sidebar/index.js";
 
 const __dirname = getDirname(import.meta.url);
 
-const IS_NETLIFY = "NETLIFY" in process.env;
-
 // The theme wrapper is located in <root>/docs-shared/src/theme-wrapper.ts
 export default theme(
   "theme",
   {
     repo: "vuepress-theme-hope/vuepress-theme-hope",
-
     blog: {
       name: "VuePress Theme Hope",
+      medias: {
+        Baidu: "https://example.com",
+        BiliBili: "https://example.com",
+        Bitbucket: "https://example.com",
+        Dingding: "https://example.com",
+        Discord: "https://example.com",
+        Dribbble: "https://example.com",
+        Email: "mailto:info@example.com",
+        Evernote: "https://example.com",
+        Facebook: "https://example.com",
+        Flipboard: "https://example.com",
+        Gitee: "https://example.com",
+        GitHub: "https://example.com",
+        Gitlab: "https://example.com",
+        Gmail: "mailto:info@example.com",
+        Instagram: "https://example.com",
+        Lark: "https://example.com",
+        Lines: "https://example.com",
+        Linkedin: "https://example.com",
+        Pinterest: "https://example.com",
+        Pocket: "https://example.com",
+        QQ: "https://example.com",
+        Qzone: "https://example.com",
+        Reddit: "https://example.com",
+        Rss: "https://example.com",
+        Steam: "https://example.com",
+        Twitter: "https://example.com",
+        Wechat: "https://example.com",
+        Weibo: "https://example.com",
+        Whatsapp: "https://example.com",
+        Youtube: "https://example.com",
+        Zhihu: "https://example.com",
+      },
     },
 
     fullscreen: true,
 
-    navTitle: false,
+    navbarTitle: "",
 
     extraLocales: {
       Русский: "https://theme-hope-ru.vuejs.press/:route",
@@ -50,6 +82,14 @@ export default theme(
     plugins: {
       blog: {
         excerptLength: 0,
+        type: [
+          getRecentUpdatedArticles({
+            locales: { "/": "Recent Updated", "/zh/": "最近更新" },
+          }),
+          getSlides({
+            locales: { "/": "Slides", "/zh/": "幻灯片" },
+          }),
+        ],
       },
 
       components: {
@@ -59,7 +99,6 @@ export default theme(
           "BiliBili",
           "CodePen",
           "PDF",
-          "Replit",
           "Share",
           "SiteInfo",
           "StackBlitz",
@@ -69,45 +108,10 @@ export default theme(
         ],
 
         componentOptions: {
-          pdf: {
-            pdfjs: "/assets/lib/pdfjs/",
-          },
           share: {
             services: AVAILABLE_SERVICES,
           },
         },
-
-        rootComponents: IS_NETLIFY
-          ? {}
-          : {
-              notice: [
-                {
-                  path: "/",
-                  title: "New docs location",
-                  content:
-                    "Our docs has moved to a new domain vuejs.press<br>Current docs is built from the latest commit on the main branch, and may contain <strong>unreleased changes</strong>!",
-                  actions: [
-                    {
-                      text: "Visit Now",
-                      link: "https://theme-hope.vuejs.press",
-                    },
-                  ],
-                },
-                {
-                  path: "/zh/",
-                  title: "新的文档地址",
-                  content:
-                    "我们的文档已经迁移至新域名 vuejs.press 下。<br>当前文档是基于主分支最新提交构建的，可能包含<strong>未发布的更改</strong>。",
-
-                  actions: [
-                    {
-                      text: "立即访问",
-                      link: "https://theme-hope.vuejs.press/zh/",
-                    },
-                  ],
-                },
-              ],
-            },
       },
 
       copyright: {
@@ -158,12 +162,14 @@ export default theme(
 
             return file;
           },
+          resolveLinkPath: false,
         },
         kotlinPlayground: true,
         mathjax: true,
         mark: true,
         markmap: true,
         mermaid: true,
+        plantuml: true,
         playground: {
           presets: ["ts", "vue", "unocss"],
         },
@@ -185,6 +191,7 @@ export default theme(
           ],
         },
         sandpack: true,
+        spoiler: true,
         stylize: [
           {
             matcher: "Recommended",
@@ -207,8 +214,22 @@ export default theme(
         sub: true,
         sup: true,
         tabs: true,
+        tasklist: true,
         vPre: true,
         vuePlayground: true,
+      },
+
+      shiki: {
+        lineNumbers: 15,
+        notationDiff: true,
+        themes: {
+          light: "github-light",
+          dark: "one-dark-pro",
+        },
+      },
+
+      watermark: {
+        enabled: false,
       },
     },
   },

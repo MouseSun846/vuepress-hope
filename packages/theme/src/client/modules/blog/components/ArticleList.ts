@@ -1,3 +1,4 @@
+import { isSupported, usePageview } from "@vuepress/plugin-comment/pageview";
 import type { PropType, VNode } from "vue";
 import {
   computed,
@@ -10,17 +11,18 @@ import {
 } from "vue";
 import { useRoute, useRouter } from "vuepress/client";
 
-import DropTransition from "@theme-hope/components/transitions/DropTransition";
+import { DropTransition } from "@theme-hope/components/transitions/index";
 import ArticleItem from "@theme-hope/modules/blog/components/ArticleItem";
 import Pagination from "@theme-hope/modules/blog/components/Pagination";
 import { EmptyIcon } from "@theme-hope/modules/blog/components/icons/index";
 import { useBlogOptions } from "@theme-hope/modules/blog/composables/index";
 
-import type { ArticleInfo } from "../../../../shared/index.js";
+import type {
+  ArticleInfoData,
+  PageInfoData,
+} from "../../../../shared/index.js";
 
 import "../styles/article-list.scss";
-
-declare const SUPPORT_PAGEVIEW: boolean;
 
 export default defineComponent({
   name: "ArticleList",
@@ -32,7 +34,10 @@ export default defineComponent({
      * 文章项目
      */
     items: {
-      type: Array as PropType<{ path: string; info: ArticleInfo }[]>,
+      type: Array as PropType<
+        { path: string; info: PageInfoData & ArticleInfoData }[]
+      >,
+
       default: () => [],
     },
   },
@@ -40,13 +45,13 @@ export default defineComponent({
   setup(props) {
     const route = useRoute();
     const router = useRouter();
-
     const blogOptions = useBlogOptions();
+    const updatePageview = usePageview();
 
     const currentPage = ref(1);
 
     const articlePerPage = computed(
-      () => blogOptions.value.articlePerPage || 10,
+      () => blogOptions.value.articlePerPage ?? 10,
     );
 
     const currentArticles = computed(() =>
@@ -74,13 +79,9 @@ export default defineComponent({
         await router.push({ path: route.path, query });
       }
 
-      if (SUPPORT_PAGEVIEW) {
+      if (isSupported) {
         await nextTick();
-        const { updatePageview } = await import(
-          /* webpackChunkName: "pageview" */ "@vuepress/plugin-comment/pageview"
-        );
-
-        await updatePageview();
+        updatePageview({ selector: ".vp-pageview" });
       }
     };
 

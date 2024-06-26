@@ -41,11 +41,19 @@ export const getFeedPlugin = (
     return null;
   }
 
-  const globalAuthor = getAuthor(themeData.author);
+  const globalAuthor = getAuthor(
+    themeData.author ?? themeData.locales["/"]?.author,
+  );
 
   const defaultOptions: FeedPluginOptions = {
-    // @ts-expect-error
+    // @ts-expect-error: hostname may not exist here
     hostname,
+    filter: ({ frontmatter, filePathRelative }) =>
+      Boolean(
+        frontmatter.feed ??
+          frontmatter["article"] ??
+          (filePathRelative && !frontmatter["home"]),
+      ),
     channel: {
       ...(favicon ? { icon: favicon } : {}),
       ...(themeData.locales["/"].logo

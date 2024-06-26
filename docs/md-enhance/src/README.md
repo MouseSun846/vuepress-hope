@@ -117,8 +117,13 @@ highlights:
 
       - title: Mark Support
         icon: highlighter
-        details: Mark words and sentences in Markdown
+        details: Mark and highlight contents
         link: ./guide/stylize/mark.html
+
+      - title: Spoiler Support
+        icon: eraser
+        details: Mark spoiler contents
+        link: ./guide/stylize/spoiler.html
 
       - title: Stylize tokens
         icon: wand-magic-sparkles
@@ -154,6 +159,11 @@ highlights:
         icon: chart-pie
         details: Add mermaid diagram in Markdown
         link: ./guide/chart/mermaid.html
+
+      - title: Plantuml Support
+        icon: diagram-project
+        details: Add plantuml diagram in Markdown
+        link: ./guide/chart/plantuml.html
 
   - header: Showing your codes and works
     image: /assets/image/code.svg

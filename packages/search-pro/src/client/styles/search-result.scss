@@ -58,7 +58,7 @@
   color: var(--vp-tc);
 
   font-weight: 600;
-  font-size: 0.85em;
+  font-size: 0.875em;
   line-height: 2rem;
   text-indent: 0.5em;
 
@@ -81,7 +81,6 @@
 .search-pro-remove-icon {
   @include reset.button;
   box-sizing: content-box;
-
   height: 1.5rem;
   padding: 0;
   border-radius: 50%;
@@ -102,8 +101,8 @@
 
 .search-pro-result-content {
   display: flex;
+  flex-flow: column;
   flex-grow: 1;
-  flex-direction: column;
   align-items: stretch;
   justify-content: center;
 

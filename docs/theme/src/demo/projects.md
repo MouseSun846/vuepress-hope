@@ -146,13 +146,6 @@ docs:
     repo: https://github.com/gorse-io/docs
     preview: /assets/image/gorse.jpg
 
-  - name: CnosDB
-    desc: An open source distributed time series database with high performance, high compression rate and high ease of use
-    logo: https://www.cnosdb.com/wp-content/uploads/2022/05/CnosDB_%E7%99%BD-300x108.png
-    url: https://docs.cnosdb.com/en/latest/
-    repo: https://github.com/cnosdb/docs
-    preview: /assets/image/cnosdb.jpg
-
   - name: Suibase
     desc: Open-Source Development Tools and Community Cookbook
     logo: https://suibase.io/logo.png
@@ -209,7 +202,13 @@ docs:
     repo: https://github.com/theme-shoka-x/shokaX-docs
     preview: /assets/image/shokax.jpg
 
-blog:
+portfolios:
+  - name: Cheng Shang
+    url: https://cheng-shang.me
+    preview: https://cheng-shang.me/portfolio.avif
+    repo: https://github.com/Mister-Hope/cheng-shang-portfolio
+
+blogs:
   - name: Mr.Hope's Blog
     desc: Where there is light, there is hope
     logo: https://mister-hope.com/logo.svg
@@ -240,10 +239,18 @@ blog:
   v-bind="item"
 />
 
+## Portfolio using VuePress Theme Hope
+
+<SiteInfo
+  v-for="item in $frontmatter.portfolios"
+  :key="item.link"
+  v-bind="item"
+/>
+
 ## Blog using VuePress Theme Hope
 
 <SiteInfo
-  v-for="item in $frontmatter.blog"
+  v-for="item in $frontmatter.blogs"
   :key="item.link"
   v-bind="item"
 />

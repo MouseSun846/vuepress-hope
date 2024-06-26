@@ -6,6 +6,8 @@ import { generateIndexFromHash } from "vuepress-shared/client";
 
 import { useCategoryMap } from "@theme-hope/modules/blog/composables/index";
 
+import cssVariables from "../../../styles/variables.module.scss";
+
 import "../styles/category-list.scss";
 
 export default defineComponent({
@@ -28,8 +30,7 @@ export default defineComponent({
               {
                 class: [
                   "vp-category",
-                  // TODO: magic number 9 is tricky here
-                  `vp-category${generateIndexFromHash(category, 9)}`,
+                  `color${generateIndexFromHash(category, Number(cssVariables["colorNumber"]))}`,
                   { active: path === page.value.path },
                 ],
               },

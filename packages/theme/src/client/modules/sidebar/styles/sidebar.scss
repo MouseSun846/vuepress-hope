@@ -1,8 +1,8 @@
 .vp-sidebar {
   position: fixed;
+  inset-inline-start: 0;
   top: 0;
   bottom: 0;
-  inset-inline-start: 0;
 
   // this prevents footer issue on tablet
   z-index: 1;
@@ -18,13 +18,12 @@
 
   font-size: 0.94rem;
 
+  backdrop-filter: saturate(150%) blur(12px);
+
   transition:
-    background var(--color-transition),
-    box-shadow var(--color-transition),
     padding var(--transform-transition),
     transform var(--transform-transition);
 
-  backdrop-filter: saturate(150%) blur(12px);
   scrollbar-color: var(--theme-color) var(--border-color);
   scrollbar-width: thin;
 
@@ -73,16 +72,12 @@
     vertical-align: -0.125em;
     height: 1em;
   }
-
-  &.hide-icon .icon {
-    display: none !important;
-  }
 }
 
 .vp-sidebar-mask {
   position: fixed;
   inset: 0;
-  z-index: 9;
+  z-index: 100;
   background: rgb(0 0 0 / 15%);
 
   &.fade-enter-active,

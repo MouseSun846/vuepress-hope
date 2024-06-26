@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-search-pro",
-  "version": "2.0.0-rc.31",
+  "version": "2.0.0-rc.50",
   "description": "A advanced search plugin in client",
   "keywords": [
     "vuepress",
@@ -44,18 +44,18 @@
     "dev:ts": "tsc -b tsconfig.build.json --watch"
   },
   "dependencies": {
-    "@vuepress/helper": "2.0.0-rc.19",
-    "@vueuse/core": "^10.9.0",
+    "@vuepress/helper": "2.0.0-rc.37",
+    "@vuepress/plugin-sass-palette": "2.0.0-rc.37",
+    "@vueuse/core": "^10.11.0",
     "cheerio": "1.0.0-rc.12",
     "chokidar": "^3.6.0",
     "slimsearch": "^2.1.1",
-    "vue": "^3.4.21",
-    "vuepress-plugin-sass-palette": "workspace:*",
+    "vue": "^3.4.29",
     "vuepress-shared": "workspace:*"
   },
   "peerDependencies": {
     "sass-loader": "^14.0.0",
-    "vuepress": "2.0.0-rc.8"
+    "vuepress": "2.0.0-rc.14"
   },
   "peerDependenciesMeta": {
     "sass-loader": {
@@ -63,7 +63,7 @@
     }
   },
   "engines": {
-    "node": ">=18.16.0",
+    "node": ">=18.19.0",
     "npm": ">=8",
     "pnpm": ">=7",
     "yarn": ">=2"

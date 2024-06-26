@@ -2,7 +2,7 @@ import { defaultTheme } from "@vuepress/theme-default";
 import { defineUserConfig } from "vuepress/cli";
 import { mdEnhancePlugin } from "vuepress-plugin-md-enhance";
 
-const base = <"/" | `/${string}/`>process.env["BASE"] || "/";
+const base = (process.env["BASE"] as "/" | `/${string}/`) || "/";
 
 export default defineUserConfig({
   base,
@@ -42,10 +42,12 @@ export default defineUserConfig({
         "/demo/mark",
         "/demo/markmap",
         "/demo/mermaid",
+        "/demo/plantuml",
         "/demo/playground",
         "/demo/revealjs",
         "/demo/sandpack",
         "/demo/slide-page",
+        "/demo/spoiler",
         "/demo/stylized",
         "/demo/sup-sub",
         "/demo/tabs",
@@ -87,6 +89,7 @@ export default defineUserConfig({
       markmap: true,
       mermaid: true,
       kotlinPlayground: true,
+      plantuml: true,
       playground: {
         presets: ["ts", "vue", "unocss"],
       },
@@ -111,6 +114,7 @@ export default defineUserConfig({
         ],
       },
       sandpack: true,
+      spoiler: true,
       stylize: [
         {
           matcher: "Recommended",
@@ -133,6 +137,7 @@ export default defineUserConfig({
       sub: true,
       sup: true,
       tabs: true,
+      tasklist: true,
       vPre: true,
       vuePlayground: true,
     }),

@@ -25,7 +25,7 @@ defineSearchConfig({
           ? fetch(
               `https://apis.tianapi.com/nlpwords/index?key=a4db17885c693a18495690cc7118b510&content=${query}`,
             )
-              .then((res) => <Promise<APIResult>>res.json())
+              .then((res) => res.json() as Promise<APIResult>)
               .then(({ result }) =>
                 result.list
                   .map(

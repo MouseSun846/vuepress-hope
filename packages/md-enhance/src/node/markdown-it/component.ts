@@ -1,6 +1,7 @@
 import { load } from "js-yaml";
-import type { Options, PluginSimple, Token } from "markdown-it";
-import type { RenderRule } from "markdown-it/lib/renderer.js";
+import type { Options, PluginSimple } from "markdown-it";
+import type { RenderRule } from "markdown-it/lib/renderer.mjs";
+import type Token from "markdown-it/lib/token.mjs";
 import type { MarkdownEnv } from "vuepress/markdown";
 
 import { stringifyProp } from "./utils.js";
@@ -21,7 +22,7 @@ const getComponentRender =
 
     if (content.trim().startsWith("{"))
       try {
-        config = <unknown>JSON.parse(content);
+        config = JSON.parse(content) as unknown;
       } catch (err) {
         // Do nothing
       }

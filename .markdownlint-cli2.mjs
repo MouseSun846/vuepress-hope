@@ -42,7 +42,7 @@ export default {
         "VideoPlayer",
         "YouTube",
         "MyComponent",
-        "AppearanceSwitch",
+        "ColorModeSwitch",
         "HopeIcon",
         "FlowChartPlayground",
         "IconDisplay",
@@ -65,5 +65,6 @@ export default {
     "**/__tests__/**",
     // markdown import demo
     "**/*.snippet.md",
+    "**/CHANGELOG.md",
   ],
 };

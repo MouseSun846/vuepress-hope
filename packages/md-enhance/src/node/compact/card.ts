@@ -7,7 +7,7 @@ import {
 } from "@vuepress/helper";
 import { load } from "js-yaml";
 import type { Options, PluginSimple } from "markdown-it";
-import type Token from "markdown-it/lib/token.js";
+import type Token from "markdown-it/lib/token.mjs";
 import type { MarkdownEnv } from "vuepress/markdown";
 
 import { stringifyProp } from "../markdown-it/utils.js";
@@ -48,7 +48,7 @@ const cardRender = (
 
   if (content.trim().startsWith("{"))
     try {
-      config = <unknown>JSON.parse(content);
+      config = JSON.parse(content) as unknown;
     } catch (err) {
       // Do nothing
       logger.error(`Parsing card as JSON config failed:`, err);
@@ -95,7 +95,7 @@ export const legacyCard: PluginSimple = (md) => {
     const { info } = tokens[index];
 
     if (info === "card")
-      return cardRender(tokens, index, options, <MarkdownEnv>env);
+      return cardRender(tokens, index, options, env as MarkdownEnv);
 
     const [realInfo] = info.split(":", 2);
 
@@ -104,7 +104,7 @@ export const legacyCard: PluginSimple = (md) => {
         "Language declaration for card is deprecated, please remove them.",
       );
 
-      return cardRender(tokens, index, options, <MarkdownEnv>env);
+      return cardRender(tokens, index, options, env as MarkdownEnv);
     }
 
     return fence!(...args);

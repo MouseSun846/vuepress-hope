@@ -20,10 +20,10 @@ import { useThemeLocaleData } from "@theme-hope/composables/index";
 import { getAncestorLinks } from "@theme-hope/utils/index";
 
 import type {
-  ArticleInfo,
+  PageInfoData,
   ThemeNormalPageFrontmatter,
 } from "../../shared/index.js";
-import { ArticleInfoType } from "../../shared/index.js";
+import { PageInfo } from "../../shared/index.js";
 
 import "../styles/breadcrumb.scss";
 
@@ -46,17 +46,17 @@ export default defineComponent({
 
     const enable = computed(
       () =>
-        (frontmatter.value.breadcrumb ||
-          (frontmatter.value.breadcrumb !== false &&
-            themeLocale.value.breadcrumb !== false)) &&
+        (frontmatter.value.breadcrumb ??
+          themeLocale.value.breadcrumb ??
+          true) &&
         config.value.length > 1,
     );
 
-    const iconEnable = computed(
+    const enableIcon = computed(
       () =>
-        frontmatter.value.breadcrumbIcon ||
-        (frontmatter.value.breadcrumbIcon !== false &&
-          themeLocale.value.breadcrumbIcon !== false),
+        frontmatter.value.breadcrumbIcon ??
+        themeLocale.value.breadcrumbIcon ??
+        true,
     );
 
     const getBreadCrumbConfig = (): void => {
@@ -65,16 +65,13 @@ export default defineComponent({
         routeLocale.value,
       )
         .map<BreadCrumbConfig | null>(({ link, name }) => {
-          const { path, meta, notFound } = resolveRoute<ArticleInfo>(link);
+          const { path, meta, notFound } = resolveRoute<PageInfoData>(link);
 
-          if (notFound) return null;
+          if (notFound || meta[PageInfo.breadcrumbExclude]) return null;
 
           return {
-            title:
-              meta[ArticleInfoType.shortTitle] ||
-              meta[ArticleInfoType.title] ||
-              name,
-            icon: meta[ArticleInfoType.icon],
+            title: meta[PageInfo.shortTitle] || meta[PageInfo.title] || name,
+            icon: meta[PageInfo.icon],
             path,
           };
         })
@@ -119,7 +116,7 @@ export default defineComponent({
                       },
                       () => [
                         // Icon
-                        iconEnable.value
+                        enableIcon.value
                           ? h(HopeIcon, { icon: item.icon })
                           : null,
                         // Text

@@ -4,7 +4,7 @@ import { enNavbar, zhNavbar } from "./navbar/index.js";
 import { enSidebar, zhSidebar } from "./sidebar/index.js";
 
 const hostname =
-  process.env["HOSTNAME"] || "https://theme-hope-docs-demo.vuejs.press";
+  process.env["HOSTNAME"] ?? "https://theme-hope-docs-demo.vuejs.press";
 
 export default hopeTheme(
   {
@@ -110,6 +110,7 @@ export default hopeTheme(
           plugins: ["highlight", "math", "search", "notes", "zoom"],
         },
         sandpack: true,
+        spoiler: true,
         stylize: [
           {
             matcher: "Recommended",
@@ -132,6 +133,7 @@ export default hopeTheme(
         sub: true,
         sup: true,
         tabs: true,
+        tasklist: true,
         vPre: true,
         vuePlayground: true,
       },
@@ -139,7 +141,7 @@ export default hopeTheme(
       pwa: {
         favicon: "/favicon.ico",
         cacheHTML: true,
-        cachePic: true,
+        cacheImage: true,
         appendBase: true,
         apple: {
           icon: "/assets/icon/apple-icon-152.png",

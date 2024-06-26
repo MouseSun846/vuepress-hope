@@ -20,12 +20,12 @@ export default defineComponent({
     const themeLocale = useThemeLocaleData();
 
     const siteBrandLink = computed(
-      () => themeLocale.value.home || routeLocale.value,
+      () => themeLocale.value.home ?? routeLocale.value,
     );
 
     const siteTitle = computed(() => siteLocale.value.title);
     const siteBrandTitle = computed(
-      () => themeLocale.value.navTitle ?? siteTitle.value,
+      () => themeLocale.value.navbarTitle ?? siteTitle.value,
     );
 
     const siteBrandLogo = computed(() =>
@@ -64,7 +64,7 @@ export default defineComponent({
                   {
                     "hide-in-pad":
                       siteBrandLogo.value &&
-                      themeLocale.value.hideSiteNameOnMobile !== false,
+                      (themeLocale.value.hideSiteNameOnMobile ?? true),
                   },
                 ],
               },

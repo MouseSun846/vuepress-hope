@@ -37,7 +37,6 @@ tag:
 - `"CodePen"`
 - `"FontIcon"`
 - `"PDF"`
-- `"Replit"`
 - `"Share"`
 - `"StackBlitz"`
 - `"VPBanner"`
@@ -48,8 +47,6 @@ tag:
 
 你可以将 `plugins.components.components` 设置为需要的组件数组，默认情况下为 `["Badge"]`。
 
-同时，你可以设置 `plugins.components.rootComponents` 来启用一些根组件，例如 Notice。
-
 插件选项请参阅 <ProjectLink name="components" path="/zh/config.html">components 插件文档</ProjectLink>。
 
 ## copyCode <Badge text="默认启用" />
@@ -59,10 +56,6 @@ tag:
 默认不需要任何额外配置。如果你不需要此功能可设置为 `false`。
 
 插件选项请参阅 [copy-code 插件文档][copy-code-config]。
-
-## externalLinkIcon <Badge text="enabled by default" />
-
-控制是否启用 `@vuepress/external-link-icon`，仅接受布尔值。
 
 ## git <Badge text="默认仅限构建模式" />
 
@@ -86,27 +79,27 @@ tag:
 
 默认情况下，主题会启用此插件，你可以设置 `false` 禁用它。
 
-## prismjs <Badge text="默认启用" />
+## prismjs
 
 控制 `@vuepress/plugin-prismjs`，通过 PrismJS 提供代码块高亮。
 
-默认情况下，主题会启用此插件，你可以设置 `false` 禁用它并自行高亮代码块。
+你可以在这里设置 `@vuepress/plugin-prismjs` 中的所有可用选项，另外还有以下选项:
 
-### prismjs.light
-
-- 类型: `PrismjsTheme`
-- 默认值: `"one-light"`
-- 详情: [界面 → 代码主题](../../guide/interface/code-theme.md)
-
-日间模式使用的 Prism.js 主题
-
-### prismjs.dark
+### prismjs.theme
 
 - 类型: `PrismjsTheme`
-- 默认值: `"one-dark"`
-- 详情: [界面 → 代码主题](../../guide/interface/code-theme.md)
+- 必填: 否
+- 详情: [界面 → 代码块](../../guide/feature/code-block.md#prismjs)
 
-夜间模式使用的 Prism.js 主题
+使用的 Prism.js 主题。可用的主题关键字详见 [Prism.js 主题](../../guide/feature/code-block.md#prismjs)。
+
+### prismjs.themes
+
+- 类型: `{ light: PrismjsTheme, dark: PrismjsTheme }`
+- 默认值: `{ light: "one-light", dark: "one-dark" }`
+- 详情: [界面 → 代码块](../../guide/feature/code-block.md#prismjs)
+
+使用的 Prism.js 双主题。可用的主题关键字详见 [Prism.js 主题](../../guide/feature/code-block.md#prismjs)。
 
 ## photoSwipe <Badge text="默认启用" />
 
@@ -153,13 +146,20 @@ tag:
 
 插件选项请参阅 [sitemap 插件文档][sitemap-config]。
 
+## watermark
+
+控制 `@vuepress/plugin-watermark`，为网站生成水印。
+
+插件选项请参阅 [watermark 插件文档][watermark-config]。
+
 [back-to-top-config]: https://ecosystem.vuejs.press/zh/plugins/back-to-top.html#options
-[catalog-config]: https://ecosystem.vuejs.press/zh/plugins/catalog.html#options
-[copy-code-config]: https://ecosystem.vuejs.press/zh/plugins/copy-code.html#options
-[git-config]: https://ecosystem.vuejs.press/zh/plugins/git.html#options
-[links-check-config]: https://ecosystem.vuejs.press/zh/plugins/links-check.html#options
-[photo-swipe-config]: https://ecosystem.vuejs.press/zh/plugins/photo-swipe.html#options
-[pwa-config]: https://ecosystem.vuejs.press/zh/plugins/pwa/config.html#options
-[reading-time-config]: https://ecosystem.vuejs.press/zh/plugins/reading-time.html#options
-[seo-config]: https://ecosystem.vuejs.press/zh/plugins/seo/config.html
-[sitemap-config]: https://ecosystem.vuejs.press/zh/plugins/sitemap/config.html
+[catalog-config]: https://ecosystem.vuejs.press/zh/plugins/features/catalog.html#options
+[copy-code-config]: https://ecosystem.vuejs.press/zh/plugins/features/copy-code.html#options
+[git-config]: https://ecosystem.vuejs.press/zh/plugins/development/git.html#options
+[links-check-config]: https://ecosystem.vuejs.press/zh/plugins/markdown/links-check.html#options
+[photo-swipe-config]: https://ecosystem.vuejs.press/zh/plugins/features/photo-swipe.html#options
+[pwa-config]: https://ecosystem.vuejs.press/zh/plugins/pwa/pwa/config.html#options
+[reading-time-config]: https://ecosystem.vuejs.press/zh/plugins/development/reading-time.html#options
+[seo-config]: https://ecosystem.vuejs.press/zh/plugins/seo/seo/config.html
+[sitemap-config]: https://ecosystem.vuejs.press/zh/plugins/seo/sitemap/config.html
+[watermark-config]: https://ecosystem.vuejs.press/zh/plugins/features/watermark.html

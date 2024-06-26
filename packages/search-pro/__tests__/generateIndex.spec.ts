@@ -1,6 +1,6 @@
 import { getPageExcerpt } from "@vuepress/helper";
 import { describe, expect, it } from "vitest";
-import type { Page } from "vuepress/core";
+import type { Bundler, Page } from "vuepress/core";
 import { createBaseApp } from "vuepress/core";
 import { path } from "vuepress/utils";
 
@@ -9,7 +9,7 @@ import { generatePageIndex } from "../src/node/generateIndex.js";
 import { Store } from "../src/node/utils.js";
 
 const app = createBaseApp({
-  bundler: {} as any,
+  bundler: {} as Bundler,
   source: path.resolve(__dirname, "./__fixtures__/src"),
   theme: emptyTheme,
 });
@@ -21,7 +21,7 @@ describe("generateIndex", () => {
     const store = new Store();
 
     app.pages.forEach((page) => {
-      page.data["excerpt"] = getPageExcerpt(app, page, {
+      page.data.excerpt = getPageExcerpt(app, page, {
         length: 0,
       });
 
@@ -33,7 +33,7 @@ describe("generateIndex", () => {
     const store = new Store();
 
     app.pages.forEach((page) => {
-      page.data["excerpt"] = getPageExcerpt(app, page, {
+      page.data.excerpt = getPageExcerpt(app, page, {
         length: 0,
       });
 
@@ -45,7 +45,7 @@ describe("generateIndex", () => {
     const store = new Store();
 
     app.pages.forEach((page) => {
-      page.data["excerpt"] = getPageExcerpt(app, page, {
+      page.data.excerpt = getPageExcerpt(app, page, {
         length: 0,
       });
 

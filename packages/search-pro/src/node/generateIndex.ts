@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-enum-comparison */
 import { entries, fromEntries, isArray, keys } from "@vuepress/helper";
 import type { AnyNode, Element } from "cheerio";
 import { load } from "cheerio";
@@ -6,7 +7,7 @@ import type { App, Page } from "vuepress/core";
 
 import type {
   SearchProCustomFieldOptions,
-  SearchProOptions,
+  SearchProPluginOptions,
 } from "./options.js";
 import type { Store } from "./utils.js";
 import type {
@@ -36,12 +37,12 @@ const CONTENT_BLOCK_TAGS =
   );
 
 /**
- * @description Not all the inline tags are included, because some of them shall not be indexed, e.g.: pre
+ * @description Not all the inline tags are included, because some of them shall not be indexed
  *
- * routerlink is added to the list, because it is a special link tag
+ * routelink and routerlink are added to the list, because they are link components
  */
 const CONTENT_INLINE_TAGS =
-  "routerlink,a,b,abbr,bdi,bdo,cite,code,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,del,ins,button,label,legend,meter,optgroup,option,output,progress,select".split(
+  "routelink,routerlink,a,b,abbr,bdi,bdo,cite,code,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,del,ins,button,label,legend,meter,optgroup,option,output,progress,select".split(
     ",",
   );
 
@@ -57,7 +58,7 @@ const renderHeader = (node: Element): string => {
     node.children[0].tagName === "a" &&
     node.children[0].attribs["class"] === "header-anchor"
   )
-    node.children = (<Element>node.children[0].children[0]).children;
+    node.children = (node.children[0].children[0] as Element).children;
 
   return node.children
     .map((node) => (node.type === "text" ? node.data : null))
@@ -74,8 +75,8 @@ export const generatePageIndex = (
   indexContent = false,
 ): IndexItem[] => {
   const { contentRendered, data, title } = page;
-  const pageId = <PageIndexId>store.addItem(page.path).toString();
-  const hasExcerpt = "excerpt" in data && data["excerpt"].length;
+  const pageId = store.addItem(page.path).toString() as PageIndexId;
+  const hasExcerpt = "excerpt" in data && data.excerpt.length;
 
   const pageIndex: PageIndexItem = { id: pageId, h: title };
   const results: IndexItem[] = [pageIndex];
@@ -86,18 +87,21 @@ export const generatePageIndex = (
   let currentContent = "";
   let isContentBeforeFirstHeader = true;
 
+  const addContentToText = (): void => {
+    if (currentContent && shouldIndexContent) {
+      ((isContentBeforeFirstHeader ? pageIndex : currentSectionIndex!).t ??=
+        []).push(currentContent.replace(/[\n\s]+/gu, " "));
+      currentContent = "";
+    }
+  };
+
   const render = (node: AnyNode, preserveSpace = false): void => {
     if (node.type === "tag") {
       if (HEADING_TAGS.includes(node.name)) {
         const { id } = node.attribs;
         const header = renderHeader(node);
 
-        if (currentContent && shouldIndexContent) {
-          // Add last content
-          ((isContentBeforeFirstHeader ? pageIndex : currentSectionIndex!).t ??=
-            []).push(currentContent.replace(/\s+/gu, " "));
-          currentContent = "";
-        }
+        addContentToText();
 
         // Update current section index only if it has an id
         if (id) {
@@ -112,12 +116,7 @@ export const generatePageIndex = (
           ((currentSectionIndex ?? pageIndex).t ??= []).push(header);
         }
       } else if (CONTENT_BLOCK_TAGS.includes(node.name)) {
-        if (currentContent && shouldIndexContent) {
-          // Add last content
-          ((isContentBeforeFirstHeader ? pageIndex : currentSectionIndex)!.t ??=
-            []).push(currentContent.replace(/\s+/gu, " "));
-          currentContent = "";
-        }
+        addContentToText();
         node.childNodes.forEach((item) =>
           render(item, preserveSpace || node.name === "pre"),
         );
@@ -162,9 +161,7 @@ export const generatePageIndex = (
   });
 
   // Push contents in last block tags
-  if (shouldIndexContent && currentContent)
-    ((isContentBeforeFirstHeader ? pageIndex : currentSectionIndex)!.t ??=
-      []).push(currentContent);
+  addContentToText();
 
   // Push last section
   if (currentSectionIndex) results.push(currentSectionIndex);
@@ -188,7 +185,7 @@ export const getSearchIndexStore = async (
     filter = (): boolean => true,
     indexOptions,
     indexLocaleOptions,
-  }: SearchProOptions,
+  }: SearchProPluginOptions,
   store: Store,
 ): Promise<SearchIndexStore> => {
   const indexesByLocale: LocaleIndex = {};

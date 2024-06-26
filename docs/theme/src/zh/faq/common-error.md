@@ -88,11 +88,11 @@ npx vp-update
 
 使用 GitHub 工作流时，在你的工作流文件中设置 `env`:
 
-```diff
-  - name: Build project
-+   env:
-+     NODE_OPTIONS: --max_old_space_size=8192
-    run: pnpm run build
+```yml
+- name: Build project
+  env: // [!code ++]
+    NODE_OPTIONS: --max_old_space_size=8192 // [!code ++]
+  run: pnpm run build
 ```
 
 在 Windows，你可以参考 [此指南](https://blog.csdn.net/weixin_37204973/article/details/82504570).
@@ -171,6 +171,7 @@ CloudFlare 的 Auto Minify 会错误的对 HTML 的空格和换行进行处理�
 如果一个组件件大概率在 SSR[^ssr] 和 CSR[^csr] 拥有不同的渲染结果，你可以用 `vuepress/client` 提供的 `<ClientOnly />` 组件包裹你的组件。
 
 [^ssr]: **SSR**: **S**erver **S**ide **R**endering，服务端渲染
+
 [^csr]: **CSR**: **C**lient **S**ide **R**endering，客户端渲染
 
 ## 热更新在开发服务器中不工作
@@ -215,7 +216,7 @@ import { defineUserConfig } from "vuepress";
 
 export default defineUserConfig({
   extendsBundlerOptions: (config, app) => {
-    addViteConfig(bundlerOptions, app, {
+    addViteConfig(config, app, {
       css: {
         postcss: {
           plugins: [postcssPresetEnv()],
@@ -235,7 +236,7 @@ import { defineUserConfig } from "vuepress";
 
 export default defineUserConfig({
   extendsBundlerOptions: (config, app) => {
-    configWebpack(bundlerOptions, app, (config) => {
+    configWebpack(config, app, (config) => {
       (((config.postcss ??= {}).postcssOptions ??= {}).plugins ??= []).push(
         postcssPresetEnv(),
       );

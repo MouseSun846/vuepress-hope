@@ -3,8 +3,9 @@ import { resolve } from "node:path";
 
 import inquirer from "inquirer";
 
-import type { Bundler, CreateLocale } from "./config/index.js";
+import type { Bundler } from "./config/index.js";
 import { bundlers, version } from "./config/index.js";
+import type { CreateLocale } from "./i18n/typings.js";
 import type { PackageManager } from "./utils/index.js";
 import { PACKAGE_NAME_REG, VERSION_REG, deepAssign } from "./utils/index.js";
 
@@ -56,13 +57,13 @@ export const createPackageJson = async ({
   const packageJsonPath = resolve(cwd, "package.json");
   const scripts = getScript(packageManager, bundler, source);
   const devDependencies = {
-    [`@vuepress/bundler-${bundler}`]: "2.0.0-rc.8",
-    vue: "^3.4.16",
-    vuepress: "2.0.0-rc.8",
+    [`@vuepress/bundler-${bundler}`]: "2.0.0-rc.14",
+    vue: "^3.4.27",
+    vuepress: "2.0.0-rc.14",
     "vuepress-theme-hope": version,
   };
 
-  if (bundler === "webpack") devDependencies["sass-loader"] = "^14.1.0";
+  if (bundler === "webpack") devDependencies["sass-loader"] = "^14.2.1";
 
   if (existsSync(packageJsonPath)) {
     console.log(locale.flow.updatePackage);

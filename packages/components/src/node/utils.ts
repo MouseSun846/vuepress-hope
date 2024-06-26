@@ -5,35 +5,43 @@ import {
 } from "@vuepress/helper";
 import { getDirname, path } from "vuepress/utils";
 
-import type { AvailableComponent } from "./options/index.js";
+import type {
+  AvailableComponent,
+  DeprecatedComponent,
+} from "./options/index.js";
 
 const __dirname = getDirname(import.meta.url);
 
-export const AVAILABLE_COMPONENTS: AvailableComponent[] = [
+export const AVAILABLE_COMPONENTS: (
+  | AvailableComponent
+  | DeprecatedComponent
+)[] = [
   "ArtPlayer",
-  "AudioPlayer",
   "Badge",
   "BiliBili",
   "CodePen",
   "FontIcon",
   "PDF",
-  "Replit",
   "Share",
   "SiteInfo",
   "StackBlitz",
   "VPBanner",
   "VPCard",
   "VidStack",
-  "VideoPlayer",
   "XiGua",
+
+  // deprecated
+  "AudioPlayer",
+  "Replit",
+  "VideoPlayer",
   "YouTube",
 ];
 
 export const COMPONENT_PKG: Record<string, string[]> = {
   ArtPlayer: ["artplayer"],
-  AudioPlayer: ["plyr"],
+  AudioPlayer: ["vidstack"],
   VidStack: ["vidstack"],
-  VideoPlayer: ["plyr"],
+  VideoPlayer: ["vidstack"],
 };
 
 export const CLIENT_FOLDER = ensureEndingSlash(

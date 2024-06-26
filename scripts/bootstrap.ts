@@ -1,14 +1,14 @@
 import { existsSync, readdirSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-import { version } from "../package.json";
+import { version } from "../lerna.json";
 
 const packagesDir = resolve(process.cwd(), "packages");
 
 const files = readdirSync(packagesDir);
 
 files.forEach((pkgName) => {
-  if (pkgName.charAt(0) === "." || pkgName === "theme") return;
+  if (pkgName.startsWith(".") || pkgName === "theme") return;
 
   const desc = `${pkgName} plugin for VuePress`;
   const pkgPath = join(packagesDir, pkgName, "package.json");
@@ -53,13 +53,13 @@ files.forEach((pkgName) => {
         "dev:ts": "tsc -b tsconfig.build.json --watch",
       },
       engines: {
-        node: ">=18.16.0",
+        node: ">=18.19.0",
         npm: ">=8",
         pnpm: ">=7",
         yarn: ">=2",
       },
       peerDependencies: {
-        vuepress: "2.0.0-rc.8",
+        vuepress: "2.0.0-rc.14",
       },
       publishConfig: {
         access: "public",

@@ -16,9 +16,9 @@ tag:
 
 1. 你需要 [提交你的网站 URL](https://docsearch.algolia.com/apply/) 来加入 DocSearch 项目。
 
-   当你的索引成功创建后， DocSearch 团队会将 apiKey 和 indexName 发送到你的邮箱。接下来，你就可以配置该插件，在 VuePress 中启用 DocSearch 了。
+   当你的索引成功创建后， DocSearch 团队会将 apiKey 和 indexName 发送到你的邮箱。接下来，你就可以配置此插件，在 VuePress 中启用 DocSearch 了。
 
-   或者，你也可以 [运行你自己的爬虫](https://docsearch.algolia.com/docs/run-your-own/) 来创建索引，然后使用你自己的 appId, apiKey 和 indexName 来配置该插件。
+   或者，你也可以 [运行你自己的爬虫](https://docsearch.algolia.com/docs/run-your-own/) 来创建索引，然后使用你自己的 appId, apiKey 和 indexName 来配置此插件。
 
 1. 为了正常的使用插件，你需要按照下列要求正确设置 Algolia Crawler。
    前往 [Algolia Crawler](https://crawler.algolia.com/admin/crawlers/) 来更新你的爬虫配置。
@@ -65,7 +65,10 @@ tag:
            return helpers.docsearch({
              recordProps: {
                lvl0: {
-                 selectors: ".sidebar-heading.active",
+                 selectors: [
+                   ".vp-sidebar-page.active",
+                   ".theme-hope-content h1",
+                 ],
                  defaultValue: "Documentation",
                },
                lvl1: ".theme-hope-content h1",
@@ -76,7 +79,7 @@ tag:
                lvl6: ".theme-hope-content h6",
                content: ".theme-hope-content p, .theme-hope-content li",
              },
-             indexHeadings: true,
+             recordVersion: "v3",
            });
          },
        },
@@ -157,7 +160,7 @@ tag:
 
    ::: warning
 
-   Crawler 配置中 `initialIndexSettings.YOUR_INDEX_NAME.attributesForFaceting` 字段**必须**包含 `"lang"`，否则该插件将无法正常工作。
+   Crawler 配置中 `initialIndexSettings.YOUR_INDEX_NAME.attributesForFaceting` 字段**必须**包含 `"lang"`，否则此插件将无法正常工作。
 
    :::
 
@@ -187,11 +190,7 @@ tag:
 
 1. 通过 `plugins.docsearch` 选项配置插件
 
-   ::: code-tabs#language
-
-   @tab TS
-
-   ```ts {8-11} title=".vuepress/config.ts"
+   ```js {7-10} title=".vuepress/config.js"
    import { defineUserConfig } from "vuepress";
    import { hopeTheme } from "vuepress-theme-hope";
 
@@ -206,26 +205,6 @@ tag:
      }),
    });
    ```
-
-   @tab JS
-
-   ```js {8-11} title=".vuepress/config.js"
-   import { defineUserConfig } from "vuepress";
-   import { hopeTheme } from "vuepress-theme-hope";
-
-   export default defineUserConfig({
-     theme: hopeTheme({
-       plugins: {
-         docsearch: {
-           // 你的选项
-           // appId, apiKey 和 indexName 是必填的
-         },
-       },
-     }),
-   });
-   ```
-
-   :::
 
 ::: info 更多
 
@@ -385,5 +364,5 @@ tag:
 
 :::
 
-[docsearch]: https://ecosystem.vuejs.press/zh/plugins/docsearch.html
-[search]: https://ecosystem.vuejs.press/zh/plugins/search.html
+[docsearch]: https://ecosystem.vuejs.press/zh/plugins/search/docsearch.html
+[search]: https://ecosystem.vuejs.press/zh/plugins/search/search.html

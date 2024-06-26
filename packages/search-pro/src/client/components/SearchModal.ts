@@ -46,9 +46,7 @@ import "../styles/search-modal.scss";
 
 const SearchResult = defineAsyncComponent({
   loader: () =>
-    import(
-      /* webpackChunkName: "search-pro-result" */ "vuepress-plugin-search-pro/result"
-    ),
+    import(/* webpackChunkName: "search-pro-result" */ "./SearchResult.js"),
   loadingComponent: () => {
     const localeConfig = useLocaleConfig(searchProLocales);
 
@@ -99,7 +97,7 @@ export default defineComponent({
     const updateQueries = useDebounceFn(
       (): void => {
         void (
-          searchOptions.value.splitWord?.(input.value) ||
+          searchOptions.value.splitWord?.(input.value) ??
           Promise.resolve(input.value.split(" "))
         ).then((result) => {
           queries.value = result;
@@ -177,7 +175,7 @@ export default defineComponent({
                         }
                     },
                     onInput: ({ target }: InputEvent) => {
-                      input.value = (<HTMLInputElement>target).value;
+                      input.value = (target as HTMLInputElement).value;
                       displaySuggestion.value = true;
                       activeSuggestionIndex.value = 0;
                     },
