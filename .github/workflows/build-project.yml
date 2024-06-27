@@ -1,7 +1,9 @@
 name: Build Project
 
 on:
-  workflow_call:
+  push:
+    branches:
+      - 'main'  
 
 jobs:
   build-project:
